@@ -9,8 +9,7 @@ import {
 // //localization  
 
 //TODO: RestoreAndWalletSetupScreen
-//import { OnBoarding } from "mitrasCompLanch";
-import { Launch } from "mitrasCompLanch";
+import { OnBoarding } from "mitrasCompLanch";
 
 
 
@@ -21,7 +20,7 @@ import { Launch } from "mitrasCompLanch";
 const OnBoardingStackNavigator = createStackNavigator(
   {
     OnBoarding: {
-      screen: Launch, //OnBoarding,
+      screen: OnBoarding,
       navigationOptions: { header: null }
     }
   },
@@ -30,7 +29,7 @@ const OnBoardingStackNavigator = createStackNavigator(
   }
 );
 
-//TODO: RootNavigator
+//TODO: RootNavigator  
 //TODO: RootNavigator:createRootNavigator
 export const createRootNavigator = (
   signedIn = false,

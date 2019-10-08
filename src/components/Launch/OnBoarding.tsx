@@ -1,17 +1,16 @@
 import React from "react";
 import { StyleSheet, View, SafeAreaView, Image, AsyncStorage, Dimensions, Alert } from "react-native";
-import { Text } from "native-base";
+import { Text, Button, Icon } from "native-base";
 import { StackActions, NavigationActions } from "react-navigation";
-
+import LinearGradient from "react-native-linear-gradient";
 import IconFontAwe from "react-native-vector-icons/FontAwesome";
 
 
 //Custome Compontes  
-import { CustomeStatusBar } from "mitrasCustStatusBar";
+import { StatusBar } from "mitrasCustStatusBar";
+import { OnBoardingSwip } from "mitrasCustOnBoarding";
 import { FullLinearGradientButton } from "mitrasCustomeLinearGradientButton";
 
-//TODO: Custome StyleSheet Files       
-import FontFamily from "mitrasStyles";
 
 //TODO: Custome object  
 import { colors, images, asyncStorageKeys } from "mitrasConstants";
@@ -26,90 +25,102 @@ export default class OnBoarding extends React.Component<any, any> {
     };
   }
 
-  componentWillMount() {
-    try {
-      //PrivacySnapshot.enabled( true );
-      //   this.setState( {
-      //     data: localization( "OnBoarding.onBoarding" )
-      //   } );
-    } catch ( error ) {
-      Alert.alert( error )
-    }
-  }
 
 
-  //TODO: func click_Done  
+
+  // TODO: func click_Done  
   click_Done() {
     try {
-      AsyncStorage.setItem(
-        asyncStorageKeys.rootViewController,
-        "PasscodeConfirm"
-      );
-      const resetAction = StackActions.reset( {
-        index: 0, // <-- currect active route from actions array
-        key: null,
-        actions: [
-          NavigationActions.navigate( { routeName: "PasscodeConfirm" } )
-        ]
-      } );
-      this.props.navigation.dispatch( resetAction );
+      //   AsyncStorage.setItem(
+      //     asyncStorageKeys.rootViewController,
+      //     "PasscodeConfirm"
+      //   );
+      //   const resetAction = StackActions.reset( {
+      //     index: 0, // <-- currect active route from actions array
+      //     key: null,
+      //     actions: [
+      //       NavigationActions.navigate( { routeName: "PasscodeConfirm" } )
+      //     ]
+      //   } );
+      //   this.props.navigation.dispatch( resetAction );
+      console.log( 'hi' );
     } catch ( error ) {
       Alert.alert( error )
     }
   }
 
   render() {
-    // const data = [
-    //   {
-    //     backgroundColor: this.state.data[ 0 ].backgroundColor,
-    //     image: images.onBoardingScreen.onB1,
-    //     title: this.state.data[ 0 ].title,
-    //     subtitle: this.state.data[ 0 ].subtitle
-    //   },
-    //   {
-    //     backgroundColor: this.state.data[ 1 ].backgroundColor,
-    //     image: images.onBoardingScreen.onB2,
-    //     title: this.state.data[ 1 ].title,
-    //     subtitle: this.state.data[ 2 ].subtitle
-    //   },
-    //   {
-    //     backgroundColor: this.state.data[ 2 ].backgroundColor,
-    //     image: images.onBoardingScreen.onB3,
-    //     title: this.state.data[ 2 ].title,
-    //     subtitle: this.state.data[ 2 ].subtitle
-    //   }
-    // ];
+    const data = [
+      {
+        backgroundColor: "#ffffff",
+        image: images.onBoarding.img1,
+        title: "On Boarding 1",
+      },
+      {
+        backgroundColor: "#ffffff",
+        image: images.onBoarding.img2,
+        title: "On Boarding 2",
+      },
+      {
+        backgroundColor: "#ffffff",
+        image: images.onBoarding.img3,
+        title: "On Boarding 3",
+      }
+    ];
     return (
       <View style={ styles.container }>
+        <StatusBar backgroundColor={ colors.white } barStyle="dark-content" />
         <SafeAreaView style={ styles.container }>
-          <View style={ { flex: 1, alignItems: "center", justifyContent: "center" } }>
-            <Text style={ [ FontFamily.ffFiraSansBold, { fontSize: 30 } ] }>Wallet Reimagined</Text>
-            <View style={ { flexDirection: "row", margin: 20, justifyContent: "center", alignContent: "center", alignItems: "center" } }>
-              <Text note style={ { margin: 10 } }>Simple</Text>
-              <IconFontAwe name="circle" color="#2F2F2F" size={ 8 } />
-              <Text note style={ { margin: 10 } }>Smart</Text>
-              <IconFontAwe name="circle" color="#2F2F2F" size={ 8 } />
-              <Text note style={ { margin: 10 } }>Secure</Text>
+          <OnBoardingSwip
+            click_GetStarted={ () => this.click_Done() }>
+            {/* First screen */ }
+            <View style={ [ styles.slide ] }>
+              <Image
+                style={ { width: 300, height: 300 } }
+                resizeMode="contain"
+                source={ data[ 0 ].image }
+              />
+              <Text style={ [ styles.header ] }>{ data[ 0 ].title }</Text>
             </View>
-          </View>
-          <View style={ { flex: 1, alignItems: "center" } }>
-            <Image
-              style={ { width: Dimensions.get( 'screen' ).width, height: 300 } }
-              resizeMode="contain"
-              source={ images.onBoardingScreen.simpleSecureSmart }
-            />
-          </View>
-          <View style={ { flex: 1, justifyContent: "flex-end" } }>
-            <FullLinearGradientButton
-              title="Get Started"
-              disabled={ this.state.flag_ConfirmDisableBtn }
-              style={ [ { opacity: 1 }, { borderRadius: 10, margin: 10 } ] }
-              click_Done={ () => this.click_Done() }
-            />
-          </View>
+            {/* Second screen */ }
+            <View style={ [ styles.slide ] }>
+              <Image
+                style={ { width: 300, height: 300 } }
+                resizeMode="contain"
+                source={ data[ 1 ].image }
+              />
+              <Text style={ [ styles.header ] }>{ data[ 1 ].title }</Text>
+
+            </View>
+            {/* Third screen */ }
+            <View style={ [ styles.slide ] }>
+              <Image
+                style={ { width: 300, height: 300 } }
+                resizeMode="contain"
+                source={ data[ 2 ].image }
+              />
+              <Text style={ [ styles.header ] }>{ data[ 2 ].title }</Text>
+            </View>
+          </OnBoardingSwip>
+          <LinearGradient
+            colors={ [ '#8948D2', '#D360F9', ] }
+            style={ { flex: 0.4, alignItems: "center", marginTop: 20 } }
+          >
+            <View style={ { flex: 1, flexDirection: "row", alignItems: "center" } }>
+              <Button light style={ { flex: 1, margin: 10, height: 60, borderRadius: 10, alignItems: "center", justifyContent: "center" } }>
+
+                <Text style={ { color: colors.appColor } }> <IconFontAwe name="edit" size={ 20 } /> SIGN UP</Text>
+              </Button>
+              <Button light style={ { flex: 1, margin: 10, height: 60, borderRadius: 10, alignItems: "center", justifyContent: "center" } }>
+                <Text style={ { color: colors.appColor } }> <IconFontAwe name="lock" size={ 20 } color={ colors.appColor } />  LOG UP</Text>
+              </Button>
+            </View>
+            <Text style={ { flex: 0.2, textAlign: "center", color: "#ffffff" } }>@ 2019 Design Studio</Text>
+          </LinearGradient>
+
+
         </SafeAreaView>
-        <CustomeStatusBar backgroundColor={ colors.white } hidden={ false } barStyle="dark-content" />
-      </View>
+      </View >
     );
   }
 }
@@ -117,11 +128,10 @@ export default class OnBoarding extends React.Component<any, any> {
 const styles = StyleSheet.create( {
   container: {
     flex: 1,
-
   },
   slide: {
     flex: 1, // Take up all screen
-    justifyContent: "center", // Center vertically
+    marginTop: 100,
     alignItems: "center" // Center horizontally
   },
   // Header styles
@@ -129,7 +139,7 @@ const styles = StyleSheet.create( {
     color: "#000000",
     fontSize: 30,
     marginVertical: 15,
-    margin: 20,
+    margin: 30,
     textAlign: "center"
   },
   // Text below header

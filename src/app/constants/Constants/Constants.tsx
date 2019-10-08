@@ -2,7 +2,7 @@ import Config from "react-native-config";
 
 //Colors  
 var colors = {
-  appColor: "#2595D6",
+  appColor: "#8742D4",
   tabbarActiveColor: "#2D71B6",
   black: "#000000",
   white: "#FFFFFF",
@@ -20,6 +20,11 @@ var colors = {
 const assetsImages = "../../../assets/images/";
 var images = {
   appIcon: require( assetsImages + "logo.png" ),
+  onBoarding: {
+    img1: require( assetsImages + "onboarding1.png" ),
+    img2: require( assetsImages + "onboarding1.png" ),
+    img3: require( assetsImages + "onboarding1.png" ),
+  }
 };
 
 

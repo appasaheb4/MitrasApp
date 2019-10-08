@@ -5,8 +5,12 @@ import {
   StyleSheet,
   ImageBackground,
   Animated,
-  Easing
+  Easing,
+  Image,
+
 } from "react-native";
+import { Text } from "native-base";
+import LinearGradient from "react-native-linear-gradient";
 
 import { colors, images, asyncStorageKeys } from "mitrasConstants";
 import Singleton from "mitrasSingleton";
@@ -28,38 +32,34 @@ export default class Launch extends Component<Props, any> {
   }
 
   async componentDidMount() {
-    // let commonData = Singleton.getInstance();
-    // let value = await AsyncStorage.getItem( asyncStorageKeys.flag_PasscodeCreate );
-    // let rootViewController = await AsyncStorage.getItem( asyncStorageKeys.rootViewController );
-    // console.log( { value, rootViewController } );
-    // let status = JSON.parse( value );
-    // setTimeout( () => {
-    //   if ( rootViewController == "PasscodeConfirm" ) {
-    //     this.props.onComplited( false, rootViewController );
-    //   }
-    //   else if ( status ) {
-    //     this.props.onComplited( false, "Passcode" );
-    //   }
-    //   else {
-    //     this.props.onComplited( false, "OnBoardingNavigator" );
-    //   }
-    // }, 3000 );
+    let rootViewController = await AsyncStorage.getItem( asyncStorageKeys.rootViewController );
+    setTimeout( () => {
+      if ( rootViewController == "OnBoardingNavigator" ) {
+        this.props.onComplited( false, rootViewController );
+      }
+      else {
+        this.props.onComplited( false, "OnBoardingNavigator" );
+      }
+    }, 3000 );
 
   }
 
   render() {
     return (
-      <View style={ styles.container }>
-        <ImageBackground
+      <LinearGradient
+        colors={ [ '#8948D2', '#D360F9', ] }
+        style={ { flex: 1, alignItems: "center" } }
+      >
+        <StatusBar hidden />
+        <Image
           source={ images.appIcon }
-          style={ styles.backgroundImage }
-          imageStyle={ {
-            resizeMode: "cover" // works only here!
-          } }
-        >
-        </ImageBackground>
-        <StatusBar backgroundColor={ colors.white } hidden={ true } barStyle="dark-content" />
-      </View>
+          resizeMode="contain"
+          style={ { flex: 1, tintColor: "#ffffff", width: 150, height: 150, marginTop: 200 } }
+        />
+        <Text style={ { flex: 1, textAlign: "center", color: "#ffffff", fontSize: 40, margin: 20 } }>Mitr</Text>
+        <Text style={ { flex: 1, textAlign: "center", color: "#ffffff" } }>Dummay Text</Text>
+        <Text style={ { flex: 0.2, textAlign: "center", color: "#ffffff" } }>@ 2019 Design Studio</Text>
+      </LinearGradient>
     );
   }
 }
