@@ -13,7 +13,7 @@ import {
 import { SvgIcon } from "@up-shared/components";
 
 //TODO: Custome StyleSheet Files       
-import FontFamily from "hexaStyles";
+import FontFamily from "mitrasStyles";
 
 
 

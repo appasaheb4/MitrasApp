@@ -54,12 +54,7 @@ export default class Launch extends Component<Props, any> {
       easing: Easing.bounce
     } ).start();
 
-    setTimeout( () => {
-      this.setState( { centerLogo: images.LaunchScreen.hexaBaseCard } )
-    }, 1000 );
-    setTimeout( () => {
-      this.setState( { centerLogo: images.LaunchScreen.hexaLogo } )
-    }, 2000 );
+
   }
 
 

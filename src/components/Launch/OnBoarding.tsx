@@ -3,22 +3,20 @@ import { StyleSheet, View, SafeAreaView, Image, AsyncStorage, Dimensions, Alert 
 import { Text } from "native-base";
 import { StackActions, NavigationActions } from "react-navigation";
 
-import CreateTables from "HexaWallet/src/app/manage/database/CreateTables";
 import IconFontAwe from "react-native-vector-icons/FontAwesome";
 
 
 //Custome Compontes  
-import { CustomeStatusBar } from "hexaCustStatusBar";
-import { FullLinearGradientButton } from "hexaCustomeLinearGradientButton";
+import { CustomeStatusBar } from "mitrasCustStatusBar";
+import { FullLinearGradientButton } from "mitrasCustomeLinearGradientButton";
 
 //TODO: Custome StyleSheet Files       
-import FontFamily from "hexaStyles";
+import FontFamily from "mitrasStyles";
 
 //TODO: Custome object  
-import { colors, images, asyncStorageKeys } from "hexaConstants";
+import { colors, images, asyncStorageKeys } from "mitrasConstants";
 
-//localization   
-import localization from "hexaLocalization/i18n";
+
 
 export default class OnBoarding extends React.Component<any, any> {
   constructor ( props: any ) {
