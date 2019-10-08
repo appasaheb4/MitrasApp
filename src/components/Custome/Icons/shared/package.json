@@ -1,0 +1,4 @@
+{
+    "name": "mitrasCustSvgIcons",
+    "main": "./components/index.tsx"
+}

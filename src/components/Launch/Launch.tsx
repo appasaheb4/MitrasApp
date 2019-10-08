@@ -8,16 +8,11 @@ import {
   Easing
 } from "react-native";
 
-import { colors, images, asyncStorageKeys } from "hexaConstants";
-import Singleton from "HexaWallet/src/app/constants/Singleton";
+import { colors, images, asyncStorageKeys } from "mitrasConstants";
+import Singleton from "mitrasSingleton";
 
-
-//TODO: Custome Object
-import { CustomeStatusBar } from "hexaCustStatusBar";
-
-
-
-import * as Keychain from "react-native-keychain";
+//TODO: Custome Object   
+import { StatusBar } from "mitrasCustStatusBar";
 
 interface Props {
   onComplited: Function;
@@ -39,8 +34,8 @@ export default class Launch extends Component<Props, any> {
     let rootViewController = await AsyncStorage.getItem( asyncStorageKeys.rootViewController );
     console.log( { value, rootViewController } );
     let status = JSON.parse( value );
-    const credentials = await Keychain.getGenericPassword();
-    commonData.setPasscode( credentials.password );
+    // const credentials = await Keychain.getGenericPassword();
+    // commonData.setPasscode( credentials.password );
     setTimeout( () => {
       if ( rootViewController == "PasscodeConfirm" ) {
         this.props.onComplited( false, rootViewController );
@@ -84,7 +79,7 @@ export default class Launch extends Component<Props, any> {
             style={ [ animatedOpcity, { height: 400, width: 400 } ] }
           />
         </ImageBackground>
-        <CustomeStatusBar backgroundColor={ colors.white } hidden={ true } barStyle="dark-content" />
+        <StatusBar backgroundColor={ colors.white } hidden={ true } barStyle="dark-content" />
       </View>
     );
   }

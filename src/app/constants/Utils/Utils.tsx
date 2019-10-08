@@ -1,17 +1,15 @@
 import moment from "moment";
-//import ConnectivityTracker from "react-native-connectivity-tracker";
 let CryptoJS = require( "crypto-js" );
 import DeviceInfo from "react-native-device-info";
-import bip39 from "bip39";
 import {
   AsyncStorage
 } from "react-native";
 
 import {
   asyncStorageKeys
-} from "hexaConstants";
+} from "mitrasConstants";
 
-import Singleton from "hexaSingleton";
+import Singleton from "mitrasSingleton";
 //TODO: Date Format
 
 const getUnixTimeDate = date => {
@@ -36,23 +34,7 @@ const getUnixToDateFormat2 = () => {
   return moment().format( 'DD MMM YYYY , hh:mm a' );
 }
 
-// //TODO: Network check
-// let isNetwork: boolean;
-// const onConnectivityChange = ( isConnected: any, timestamp: any, connectionInfo: any ) => {
-//   console.log( "connection state change" );
-//   isNetwork = isConnected;
-// };
 
-// ConnectivityTracker.init( {
-//   onConnectivityChange,
-//   attachConnectionInfo: false,
-//   onError: ( msg: any ) => console.log( msg )
-//   // verifyServersAreUp: () => store.dispatch(checkOurServersAreUp()),
-// } );
-
-const getNetwork = () => {
-  return true //isNetwork;  
-};
 
 const encrypt = ( data: any, password: string ) => {
   let ciphertext = CryptoJS.AES.encrypt( data, password );
@@ -164,10 +146,6 @@ const getIphoneSize = () => {
 }
 
 
-const getMnemonic = () => {
-  let mnemonic = bip39.generateMnemonic();
-  return mnemonic.split( " " );
-}
 
 const isJson = ( str: string ) => {
   try {
@@ -334,7 +312,6 @@ module.exports = {
   getUnixToNormaDateFormat,
   getUnixToDateFormat1,
   getUnixToDateFormat2,
-  getNetwork,
   encrypt,
   encryptAgain,
   decrypt,
@@ -347,7 +324,6 @@ module.exports = {
   isJson,
 
   //Singleton          
-  getMnemonic,
   getWalletDetails,
   setWalletDetails,
   getSetupWallet,
