@@ -179,6 +179,15 @@ android {
 }
 
 dependencies {
+    implementation project(':react-native-webview')
+    implementation project(':react-native-vector-icons')
+    implementation project(':react-native-linear-gradient')
+    implementation project(':react-native-image-picker')
+    implementation project(':react-native-i18n')
+    implementation project(':react-native-gesture-handler')
+    implementation project(':react-native-device-info')
+    implementation project(':react-native-camera')
+    implementation project(':react-native-config')
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "com.facebook.react:react-native:+"  // From node_modules
 

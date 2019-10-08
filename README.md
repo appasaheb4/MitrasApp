@@ -6,11 +6,11 @@
 ```
 git clone https://github.com/appasaheb4/Mitras.git
 cd Mitras
-sudo yarn install
+sudo yarn install  
 # for android
 npm run android-dev
-# for ios
-react-native run-ios
+# for ios   
+react-native run-ios   
 ```   
       
 
