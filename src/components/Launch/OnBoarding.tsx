@@ -107,7 +107,6 @@ export default class OnBoarding extends React.Component<any, any> {
               click_Done={ () => this.click_Done() }
             />
           </View>
-          <CreateTables />
         </SafeAreaView>
         <CustomeStatusBar backgroundColor={ colors.white } hidden={ false } barStyle="dark-content" />
       </View>

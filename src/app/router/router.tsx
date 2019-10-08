@@ -9,7 +9,9 @@ import {
 // //localization  
 
 //TODO: RestoreAndWalletSetupScreen
-import { OnBoarding } from "mitrasCompLanch";
+//import { OnBoarding } from "mitrasCompLanch";
+import { Launch } from "mitrasCompLanch";
+
 
 
 
@@ -19,7 +21,7 @@ import { OnBoarding } from "mitrasCompLanch";
 const OnBoardingStackNavigator = createStackNavigator(
   {
     OnBoarding: {
-      screen: OnBoarding,
+      screen: Launch, //OnBoarding,
       navigationOptions: { header: null }
     }
   },

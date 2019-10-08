@@ -1,6 +1,4 @@
 import Config from "react-native-config";
-import { Platform } from "react-native";
-
 
 //Colors  
 var colors = {
@@ -16,10 +14,12 @@ var colors = {
 };
 
 
+
+
+
 const assetsImages = "../../../assets/images/";
 var images = {
-  // appBackgound: require( assetsImages + "icon/mainBackgoundImage.png" ),
-  // appIcon: require( assetsImages + "appLogo.png" ),
+  appIcon: require( assetsImages + "logo.png" ),
 };
 
 
