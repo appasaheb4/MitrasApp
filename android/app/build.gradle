@@ -1,6 +1,7 @@
 apply plugin: "com.android.application"
 
 import com.android.build.OutputFile
+apply plugin: 'io.fabric' 
 
 /**
  * The react.gradle file registers a task for each build variant (e.g. bundleDebugJsAndAssets
@@ -81,6 +82,8 @@ project.ext.react = [
 ]
 
 apply from: "../../node_modules/react-native/react.gradle"
+apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
+apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
 
 /**
  * Set this to true to create two separate APKs instead of one:
@@ -133,6 +136,7 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"  
+        multiDexEnabled true  
         missingDimensionStrategy 'react-native-camera', 'general' 
     }   
     splits {   
@@ -140,25 +144,35 @@ android {
             reset()
             enable enableSeparateBuildPerCPUArchitecture
             universalApk false  // If true, also generate a universal APK
-            include "armeabi-v7a", "x86", "arm64-v8a", "x86_64"
+            include "armeabi-v7a", "x86"
         }
     }
-    signingConfigs {
-        debug {
-            storeFile file('debug.keystore')
-            storePassword 'android'
-            keyAlias 'androiddebugkey'
-            keyPassword 'android'
-        }
-    }
+    // signingConfigs {
+    //     debug {
+    //         storeFile file('debug.keystore')
+    //         storePassword 'android'
+    //         keyAlias 'androiddebugkey'
+    //         keyPassword 'android'
+    //     }
+    // }
+      signingConfigs {
+release {
+storeFile file("mitras.keystore")
+ storePassword "developer"
+keyAlias "mitras"
+ keyPassword "developer"   
+ }         
+ }   
     buildTypes {
-        debug {
-            signingConfig signingConfigs.debug
-        }
+        // debug {
+        //     signingConfig signingConfigs.debug
+        // }
         release {
             // Caution! In production, you need to generate your own keystore file.
             // see https://facebook.github.io/react-native/docs/signed-apk-android.
-            signingConfig signingConfigs.debug
+            debuggable false                   
+            aaptOptions.cruncherEnabled=false // here   
+            signingConfig signingConfigs.release
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
@@ -168,7 +182,7 @@ android {
         variant.outputs.each { output ->
             // For each separate APK per architecture, set a unique version code as described here:
             // https://developer.android.com/studio/build/configure-apk-splits.html
-            def versionCodes = ["armeabi-v7a": 1, "x86": 2, "arm64-v8a": 3, "x86_64": 4]
+            def versionCodes = ["armeabi-v7a": 1, "x86": 2]
             def abi = output.getFilter(OutputFile.ABI)
             if (abi != null) {  // null for the universal-debug, universal-release variants
                 output.versionCodeOverride =
@@ -180,6 +194,9 @@ android {
 }
 
 dependencies {
+     compile('com.crashlytics.sdk.android:crashlytics:2.9.9@aar') {
+    transitive = true;
+    } 
     implementation project(':react-native-webview')
     implementation project(':react-native-vector-icons')
     implementation project(':react-native-linear-gradient')
@@ -199,7 +216,7 @@ dependencies {
     } else {
         implementation jscFlavor
     }
-}
+}     
 
 // Run this once to be able to run the application with BUCK
 // puts all compile dependencies into folder libs for BUCK to use
