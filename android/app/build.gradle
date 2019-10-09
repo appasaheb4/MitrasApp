@@ -1,7 +1,7 @@
 apply plugin: "com.android.application"
 
 import com.android.build.OutputFile
-apply plugin: 'io.fabric' 
+apply plugin: 'io.fabric'   
 
 /**
  * The react.gradle file registers a task for each build variant (e.g. bundleDebugJsAndAssets
@@ -43,10 +43,10 @@ apply plugin: 'io.fabric'
  *   // The configuration property can be in the following formats
  *   //         'devDisabledIn${productFlavor}${buildType}'
  *   //         'devDisabledIn${buildType}'
- *
+ *  
  *   // the root of your project, i.e. where "package.json" lives
  *   root: "../../",
- *
+ *  
  *   // where to put the JS bundle asset in debug mode
  *   jsBundleDirDebug: "$buildDir/intermediates/assets/debug",
  *
@@ -124,18 +124,18 @@ def enableHermes = project.ext.react.get("enableHermes", false);
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
-
-    compileOptions {
+  
+    compileOptions {   
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-
+    
     defaultConfig {
         applicationId "com.mitras"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
-        versionName "1.0"  
+        versionName "1.0.0.091019"     
         multiDexEnabled true  
         missingDimensionStrategy 'react-native-camera', 'general' 
     }   

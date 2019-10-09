@@ -34,7 +34,7 @@ export default class Launch extends Component<Props, any> {
   async componentDidMount() {
     let rootViewController = await AsyncStorage.getItem( asyncStorageKeys.rootViewController );
     setTimeout( () => {
-      if ( rootViewController == "OnBoardingNavigator" ) {
+      if ( rootViewController == "TabbarNavigator" ) {
         this.props.onComplited( false, rootViewController );
       }
       else {
