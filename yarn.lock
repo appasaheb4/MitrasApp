@@ -5936,10 +5936,10 @@ react-native-image-zoom-viewer@^2.2.26:
   dependencies:
     react-native-image-pan-zoom "^2.1.9"
 
-react-native-indicators@^0.13.0:
-  version "0.13.0"
-  resolved "https://registry.yarnpkg.com/react-native-indicators/-/react-native-indicators-0.13.0.tgz#001824bba194b1ca6e654d903beaf0168d4e6ac8"
-  integrity sha1-ABgku6GUscpuZU2QO+rwFo1Oasg=
+react-native-indicators@^0.16.0:
+  version "0.16.0"
+  resolved "https://registry.yarnpkg.com/react-native-indicators/-/react-native-indicators-0.16.0.tgz#7e672fb8c213c471db1fac1bef89625d4261cc1a"
+  integrity sha512-KFNwJ+kSY7UExx6xhc0MweLRMHeFV4WfD+rdlAJH2l/AW8ft8uSnLNJgBGuB7pZ4KT+CEW/xMxMD8tVMU421Bg==
   dependencies:
     prop-types "^15.5.10"
 
