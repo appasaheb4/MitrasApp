@@ -8,7 +8,6 @@ import {
     Image,
     SafeAreaView,
     Keyboard,
-    StatusBar,
     Linking,
     Alert
 } from "react-native";
@@ -33,20 +32,22 @@ import {
 } from "native-base";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import axios from "axios";
-import Loader from "SocietyManage/src/view/Custom/Loader/ModelLoader.tsx";
+
+
+import { ModelLoader } from "mitrasCustLoader";
 
 //TODO: Custome Comp 
 import { FullLinearGradientButton } from "hexaCustomeLinearGradientButton";
+import { HeaderTitle } from "mitrasCustHeader";
 import { StatusBar } from "mitrasCustStatusBar";
 
 
 //TODO: Custome Object 
-import { colors, images, apiary } from "SocietyManage/src/app/constants/constants";
+import { colors, images, apiary } from "mitrasConstants";
 
-var ApiManager = require( "SocietyManage/src/manage/ApiManager/ApiManager" );
 //TODO: Custome Validation
-import { validationService } from "SocietyManage/src/app/validation/service";
-import utils from "SocietyManage/src/app/constants/utils";
+import { validationService } from "mitrasValidation";
+import utils from "mitrasUtils";
 
 
 
@@ -58,14 +59,14 @@ export default class Registration extends Component<Props, any> {
     constructor ( props: any ) {
         super( props );
         this.state = {
-            arrSocietyList: [ {
-                "item": "Select"
-            } ],
-            itemSocietyName: "Select",
             flag_Loading: false,
             inputs: {
                 name: {
                     type: "generic",
+                    value: ""
+                },
+                email: {
+                    type: "email",
                     value: ""
                 },
                 mobileNo: {
@@ -87,25 +88,26 @@ export default class Registration extends Component<Props, any> {
         this.getFormValidation = validationService.getFormValidation.bind( this );
     }
 
-    async componentWillMount() {
-        var data = await ApiManager.getAllData( apiary.getSocietyNames );
-        data = data.data;
-        if ( data.statusCode == 200 ) {
-            if ( data.data.length > 0 ) {
-                let temp = [];
-                for ( let i = 0; i < data.data.length; i++ ) {
-                    let jsonData = data.data[ i ];
-                    temp.push( { "item": jsonData.societyName } )
-                }
-                this.setState( {
-                    arrSocietyList: temp,
-                    itemSocietyName: temp[ 0 ].item
-                } )
-            } else {
-                Alert.alert( "Sry not found society name list." );
-            }
-        }
-    }
+    // async componentWillMount() {
+    //     var data = await ApiManager.getAllData( apiary.getSocietyNames );
+    //     data = data.data;
+    //     if ( data.statusCode == 200 ) {
+    //         if ( data.data.length > 0 ) {
+    //             let temp = [];
+    //             for ( let i = 0; i < data.data.length; i++ ) {
+    //                 let jsonData = data.data[ i ];
+    //                 temp.push( { "item": jsonData.societyName } )
+    //             }
+    //             this.setState( {
+    //                 arrSocietyList: temp,
+    //                 itemSocietyName: temp[ 0 ].item
+    //             } )
+    //         } else {
+    //             Alert.alert( "Sry not found society name list." );
+    //         }
+    //     }
+    // }
+
 
     //TODO: select option
     onValueChange( value: string ) {
@@ -114,65 +116,64 @@ export default class Registration extends Component<Props, any> {
         } );
     }
 
-
     click_Next = () => {
         this.getFormValidation();
-        const { inputs, itemSocietyName } = this.state;
-        console.log( { inputs } );
-        var isValid = true;
-        for ( var i in inputs ) {
-            if ( inputs[ i ].hasOwnProperty( 'errorLabel' ) ) {
-                if ( inputs[ i ].errorLabel != null ) {
-                    console.log( 'null' );
-                    isValid = false;
-                    break;
-                }
-            } else {
-                isValid = false;
-                break;
-            }
-        }
-        console.log( { isValid } );
-        if ( isValid ) {
-            if ( inputs.password.value == inputs.confirmPassword.value ) {
-                this.setState( {
-                    flag_Loading: true
-                } );
-                var body = {
-                    date: Date.now(),
-                    societyName: itemSocietyName,
-                    name: inputs.name.value,
-                    mobileNo: inputs.mobileNo.value,
-                    tokenNo: utils.getTokenNo(),
-                    password: inputs.confirmPassword.value,
-                    type: "guard"
-                };
-                console.log( { body } );
-                axios( {
-                    method: "post",
-                    url: apiary.registration,
-                    data: body
-                } )
-                    .then( ( response: any ) => {
-                        let data = response.data;
-                        console.log( { data } );
-                        if ( data.statusCode == 200 ) {
-                            this.props.click_Next( inputs.mobileNo.value, data.data.otp );
-                        } else {
-                            Alert.alert( data.msg );
-                        }
-                        this.setState( {
-                            flag_Loading: false
-                        } );
-                    } )
-                    .catch( function ( error: any ) {
-                        console.log( error );
-                    } );
+        // const { inputs, itemSocietyName } = this.state;
+        // console.log( { inputs } );
+        // var isValid = true;
+        // for ( var i in inputs ) {
+        //     if ( inputs[ i ].hasOwnProperty( 'errorLabel' ) ) {
+        //         if ( inputs[ i ].errorLabel != null ) {
+        //             console.log( 'null' );
+        //             isValid = false;
+        //             break;
+        //         }
+        //     } else {
+        //         isValid = false;
+        //         break;
+        //     }
+        // }
+        // console.log( { isValid } );
+        // if ( isValid ) {
+        //     if ( inputs.password.value == inputs.confirmPassword.value ) {
+        //         this.setState( {
+        //             flag_Loading: true
+        //         } );
+        //         var body = {
+        //             date: Date.now(),
+        //             societyName: itemSocietyName,
+        //             name: inputs.name.value,
+        //             mobileNo: inputs.mobileNo.value,
+        //             tokenNo: utils.getTokenNo(),
+        //             password: inputs.confirmPassword.value,
+        //             type: "guard"
+        //         };
+        //         console.log( { body } );
+        //         axios( {
+        //             method: "post",
+        //             url: apiary.registration,
+        //             data: body
+        //         } )
+        //             .then( ( response: any ) => {
+        //                 let data = response.data;
+        //                 console.log( { data } );
+        //                 if ( data.statusCode == 200 ) {
+        //                     this.props.click_Next( inputs.mobileNo.value, data.data.otp );
+        //                 } else {
+        //                     Alert.alert( data.msg );
+        //                 }
+        //                 this.setState( {
+        //                     flag_Loading: false
+        //                 } );
+        //             } )
+        //             .catch( function ( error: any ) {
+        //                 console.log( error );
+        //             } );
 
-            } else {
-                Alert.alert( 'Please enter correct password and confirm password.' );
-            }
-        }
+        //     } else {
+        //         Alert.alert( 'Please enter correct password and confirm password.' );
+        //     }
+        // }
     }
 
     //TODO: Validation
@@ -185,12 +186,12 @@ export default class Registration extends Component<Props, any> {
     }
 
     render() {
-        const itemList = this.state.arrSocietyList.map( ( item: any, index: number ) => (
-            <Picker.Item label={ item.item } value={ item.item } />
-        ) );
         let { flag_Loading } = this.state;
         return (
             <Container>
+                <HeaderTitle title="Registration"
+                    pop={ () => this.props.navigation.pop() }
+                />
                 <Content
                     contentContainerStyle={ styles.container }
                 >
@@ -200,34 +201,13 @@ export default class Registration extends Component<Props, any> {
                         contentContainerStyle={ { flexGrow: 1 } }
                     >
                         <View style={ { flex: 1, alignItems: "center", marginTop: 20 } }>
-                            <View style={ [ styles.itemQuestionPicker ] }>
-                                <Picker
-                                    renderHeader={ backAction =>
-                                        <Header style={ { backgroundColor: "#ffffff" } }>
-                                            <Left>
-                                                <Button transparent onPress={ backAction }>
-                                                    <Icon name="arrow-back" style={ { color: "#000" } } />
-                                                </Button>
-                                            </Left>
-                                            <Body style={ { flex: 3 } }>
-                                                <Title style={ [ { color: "#000" } ] }>Select Question</Title>
-                                            </Body>
-                                            <Right />
-                                        </Header> }
-                                    mode="dropdown"
-                                    iosIcon={ <Icon name="arrow-down" style={ { fontSize: 25, marginLeft: -10 } } /> }
-                                    selectedValue={ this.state.itemSocietyName }
-                                    onValueChange={ this.onValueChange.bind( this ) }
-                                >
-                                    { itemList }
-                                </Picker>
-                            </View>
+
                             <View style={ styles.viewInputFiled }>
                                 <Item rounded style={ styles.itemInputWalletName }>
                                     <Input
                                         keyboardType="default"
                                         autoCapitalize='sentences'
-                                        placeholder='Your Name'
+                                        placeholder='Name'
                                         placeholderTextColor="#B7B7B7"
                                         onChangeText={ value => {
                                             this.onInputChange( { id: "name", value } );
@@ -235,6 +215,20 @@ export default class Registration extends Component<Props, any> {
                                     />
                                 </Item>
                                 { this.renderError( "name" ) }
+                            </View>
+                            <View style={ styles.viewInputFiled }>
+                                <Item rounded style={ styles.itemInputWalletName }>
+                                    <Input
+                                        keyboardType="email-address"
+                                        autoCapitalize='sentences'
+                                        placeholder='Email'
+                                        placeholderTextColor="#B7B7B7"
+                                        onChangeText={ value => {
+                                            this.onInputChange( { id: "email", value } );
+                                        } }
+                                    />
+                                </Item>
+                                { this.renderError( "email" ) }
                             </View>
                             <View style={ styles.viewInputFiled }>
                                 <Item rounded style={ styles.itemInputWalletName }>
@@ -283,15 +277,23 @@ export default class Registration extends Component<Props, any> {
                         </View>
                         <View style={ { flex: 0.1 } }>
                             <FullLinearGradientButton
-                                title="Next"
+                                title="Registration"
                                 disabled={ false }
                                 style={ [ false ? { opacity: 0.4 } : { opacity: 1 }, { borderRadius: 10 } ] }
                                 click_Done={ () => this.click_Next() } />
+                            <Button
+                                transparent
+                                style={ { justifyContent: "center" } }
+                                onPress={ () => this.props.navigation.push( "Login" ) }
+                            >
+                                <Text >Already member, Login In
+                         </Text>
+                            </Button>
                         </View>
                     </KeyboardAwareScrollView>
                 </Content>
-                <CustomeStatusBar backgroundColor={ colors.appColor } flagShowStatusBar={ true } barStyle="light-content" />
-                <Loader loading={ flag_Loading } color={ colors.appColor } size={ 30 } />
+                <StatusBar backgroundColor={ colors.appColor } flagShowStatusBar={ true } barStyle="light-content" />
+                <ModelLoader loading={ flag_Loading } color={ colors.appColor } size={ 30 } />
             </Container>
         );
     }

@@ -107,12 +107,17 @@ export default class OnBoarding extends React.Component<any, any> {
             style={ { flex: 0.4, alignItems: "center", marginTop: 20 } }
           >
             <View style={ { flex: 1, flexDirection: "row", alignItems: "center" } }>
-              <Button light style={ { flex: 1, margin: 10, height: 60, borderRadius: 10, alignItems: "center", justifyContent: "center" } }>
-
+              <Button light
+                style={ { flex: 1, margin: 10, height: 60, borderRadius: 10, alignItems: "center", justifyContent: "center" } }
+                onPress={ () => this.props.navigation.push( "Registration" ) }
+              >
                 <Text style={ { color: colors.appColor } }> <IconFontAwe name="edit" size={ 20 } /> SIGN UP</Text>
               </Button>
-              <Button light style={ { flex: 1, margin: 10, height: 60, borderRadius: 10, alignItems: "center", justifyContent: "center" } }>
-                <Text style={ { color: colors.appColor } }> <IconFontAwe name="lock" size={ 20 } color={ colors.appColor } />  LOG UP</Text>
+              <Button light
+                style={ { flex: 1, margin: 10, height: 60, borderRadius: 10, alignItems: "center", justifyContent: "center" } }
+                onPress={ () => this.props.navigation.push( "Login" ) }
+              >
+                <Text style={ { color: colors.appColor } }> <IconFontAwe name="lock" size={ 20 } color={ colors.appColor } />  LOG IN</Text>
               </Button>
             </View>
             <Text style={ { flex: 0.2, textAlign: "center", color: "#ffffff" } }>@ 2019 Design Studio</Text>

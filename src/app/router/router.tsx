@@ -10,6 +10,7 @@ import {
 
 //TODO: RestoreAndWalletSetupScreen
 import { OnBoarding } from "mitrasCompLanch";
+import { Login, Registration } from "mitrasCompLogin";
 
 
 
@@ -21,6 +22,14 @@ const OnBoardingStackNavigator = createStackNavigator(
   {
     OnBoarding: {
       screen: OnBoarding,
+      navigationOptions: { header: null }
+    },
+    Login: {
+      screen: Login,
+      navigationOptions: { header: null }
+    },
+    Registration: {
+      screen: Registration,
       navigationOptions: { header: null }
     }
   },

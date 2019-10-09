@@ -2,7 +2,7 @@ import Config from "react-native-config";
 
 //Colors  
 var colors = {
-  appColor: "#8742D4",
+  appColor: "#8848D2",
   tabbarActiveColor: "#2D71B6",
   black: "#000000",
   white: "#FFFFFF",

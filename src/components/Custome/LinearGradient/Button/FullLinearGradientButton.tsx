@@ -18,7 +18,7 @@ export default class FullLinearGradientButton extends Component<Props, any> {
     render = ( { children } = this.props ) => {
         return (
             <LinearGradient
-                colors={ [ "#806730", colors.appColor, ] }
+                colors={ [ "#D360F6", colors.appColor, ] }
                 start={ { x: 0, y: 0 } }
                 end={ { x: 1, y: 0 } }
                 style={ [ styles.btnDone, this.props.style ] }

@@ -32,21 +32,7 @@ import {
     Fab
 } from "native-base";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import axios from "axios";
-import Loader from "SocietyManage/src/view/Custom/Loader/ModelLoader.tsx";
 
-//TODO: Custome Comp 
-import FullLinearGradientButton from "SocietyManage/src/view/Custom/LinearGradient/Button/FullLinearGradientButton";
-import CustomeStatusBar from "SocietyManage/src/view/Custom/StatusBar/CustomeStatusBar";
-
-
-//TODO: Custome Object 
-import { colors, images, apiary } from "SocietyManage/src/app/constants/constants";
-
-var ApiManager = require( "SocietyManage/src/manage/ApiManager/ApiManager" );
-//TODO: Custome Validation
-import { validationService } from "SocietyManage/src/app/validation/service";
-import utils from "SocietyManage/src/app/constants/utils";
 
 
 
@@ -58,10 +44,6 @@ export default class Login extends Component<Props, any> {
     constructor ( props: any ) {
         super( props );
         this.state = {
-            arrSocietyList: [ {
-                "item": "Select"
-            } ],
-            itemSocietyName: "Select",
             flag_Loading: false,
             inputs: {
                 name: {
@@ -83,111 +65,90 @@ export default class Login extends Component<Props, any> {
             }
         };
 
-        this.onInputChange = validationService.onInputChange.bind( this );
-        this.getFormValidation = validationService.getFormValidation.bind( this );
+        // this.onInputChange = validationService.onInputChange.bind( this );
+        // this.getFormValidation = validationService.getFormValidation.bind( this );
     }
 
-    async componentWillMount() {
-        var data = await ApiManager.getAllData( apiary.getSocietyNames );
-        data = data.data;
-        if ( data.statusCode == 200 ) {
-            if ( data.data.length > 0 ) {
-                let temp = [];
-                for ( let i = 0; i < data.data.length; i++ ) {
-                    let jsonData = data.data[ i ];
-                    temp.push( { "item": jsonData.societyName } )
-                }
-                this.setState( {
-                    arrSocietyList: temp,
-                    itemSocietyName: temp[ 0 ].item
-                } )
-            } else {
-                Alert.alert( "Sry not found society name list." );
-            }
-        }
-    }
+    // //TODO: select option
+    // onValueChange( value: string ) {
+    //     this.setState( {
+    //         itemSocietyName: value
+    //     } );
+    // }
 
-    //TODO: select option
-    onValueChange( value: string ) {
-        this.setState( {
-            itemSocietyName: value
-        } );
-    }
+    // click_Next = () => {
+    //     this.getFormValidation();
+    //     const { inputs, itemSocietyName } = this.state;
+    //     console.log( { inputs } );
+    //     var isValid = true;
+    //     for ( var i in inputs ) {
+    //         if ( inputs[ i ].hasOwnProperty( 'errorLabel' ) ) {
+    //             if ( inputs[ i ].errorLabel != null ) {
+    //                 console.log( 'null' );
+    //                 isValid = false;
+    //                 break;
+    //             }
+    //         } else {
+    //             isValid = false;
+    //             break;
+    //         }
+    //     }
+    //     console.log( { isValid } );
+    //     if ( isValid ) {
+    //         if ( inputs.password.value == inputs.confirmPassword.value ) {
+    //             this.setState( {
+    //                 flag_Loading: true
+    //             } );
+    //             var body = {
+    //                 date: Date.now(),
+    //                 societyName: itemSocietyName,
+    //                 name: inputs.name.value,
+    //                 mobileNo: inputs.mobileNo.value,
+    //                 tokenNo: utils.getTokenNo(),
+    //                 password: inputs.confirmPassword.value,
+    //                 type: "guard"
+    //             };
+    //             console.log( { body } );
+    //             axios( {
+    //                 method: "post",
+    //                 url: apiary.registration,
+    //                 data: body
+    //             } )
+    //                 .then( ( response: any ) => {
+    //                     let data = response.data;
+    //                     console.log( { data } );
+    //                     if ( data.statusCode == 200 ) {
+    //                         this.props.click_Next( inputs.mobileNo.value, data.data.otp );
+    //                     } else {
+    //                         Alert.alert( data.msg );
+    //                     }
+    //                     this.setState( {
+    //                         flag_Loading: false
+    //                     } );
+    //                 } )
+    //                 .catch( function ( error: any ) {
+    //                     console.log( error );
+    //                 } );
 
+    //         } else {
+    //             Alert.alert( 'Please enter correct password and confirm password.' );
+    //         }
+    //     }
+    // }
 
-    click_Next = () => {
-        this.getFormValidation();
-        const { inputs, itemSocietyName } = this.state;
-        console.log( { inputs } );
-        var isValid = true;
-        for ( var i in inputs ) {
-            if ( inputs[ i ].hasOwnProperty( 'errorLabel' ) ) {
-                if ( inputs[ i ].errorLabel != null ) {
-                    console.log( 'null' );
-                    isValid = false;
-                    break;
-                }
-            } else {
-                isValid = false;
-                break;
-            }
-        }
-        console.log( { isValid } );
-        if ( isValid ) {
-            if ( inputs.password.value == inputs.confirmPassword.value ) {
-                this.setState( {
-                    flag_Loading: true
-                } );
-                var body = {
-                    date: Date.now(),
-                    societyName: itemSocietyName,
-                    name: inputs.name.value,
-                    mobileNo: inputs.mobileNo.value,
-                    tokenNo: utils.getTokenNo(),
-                    password: inputs.confirmPassword.value,
-                    type: "guard"
-                };
-                console.log( { body } );
-                axios( {
-                    method: "post",
-                    url: apiary.registration,
-                    data: body
-                } )
-                    .then( ( response: any ) => {
-                        let data = response.data;
-                        console.log( { data } );
-                        if ( data.statusCode == 200 ) {
-                            this.props.click_Next( inputs.mobileNo.value, data.data.otp );
-                        } else {
-                            Alert.alert( data.msg );
-                        }
-                        this.setState( {
-                            flag_Loading: false
-                        } );
-                    } )
-                    .catch( function ( error: any ) {
-                        console.log( error );
-                    } );
-
-            } else {
-                Alert.alert( 'Please enter correct password and confirm password.' );
-            }
-        }
-    }
-
-    //TODO: Validation
-    renderError( id: any ) {
-        const { inputs } = this.state;
-        if ( inputs[ id ].errorLabel ) {
-            return <Text style={ validationService.styles.error }>{ inputs[ id ].errorLabel }</Text>;
-        }
-        return null;
-    }
+    // //TODO: Validation
+    // renderError( id: any ) {
+    //     const { inputs } = this.state;
+    //     if ( inputs[ id ].errorLabel ) {
+    //         return <Text style={ validationService.styles.error }>{ inputs[ id ].errorLabel }</Text>;
+    //     }
+    //     return null;
+    // }
 
     render() {
-        const itemList = this.state.arrSocietyList.map( ( item: any, index: number ) => (
-            <Picker.Item label={ item.item } value={ item.item } />
-        ) );
+        // const itemList = this.state.arrSocietyList.map( ( item: any, index: number ) => (
+        //     <Picker.Item label={ item.item } value={ item.item } />
+        // ) );
         let { flag_Loading } = this.state;
         return (
             <Container>
@@ -200,7 +161,7 @@ export default class Login extends Component<Props, any> {
                         contentContainerStyle={ { flexGrow: 1 } }
                     >
                         <View style={ { flex: 1, alignItems: "center", marginTop: 20 } }>
-                            <View style={ [ styles.itemQuestionPicker ] }>
+                            {/* <View style={ [ styles.itemQuestionPicker ] }>
                                 <Picker
                                     renderHeader={ backAction =>
                                         <Header style={ { backgroundColor: "#ffffff" } }>
@@ -287,11 +248,13 @@ export default class Login extends Component<Props, any> {
                                 disabled={ false }
                                 style={ [ false ? { opacity: 0.4 } : { opacity: 1 }, { borderRadius: 10 } ] }
                                 click_Done={ () => this.click_Next() } />
+                        </View> */}
+                            <Text>hi</Text>
                         </View>
                     </KeyboardAwareScrollView>
                 </Content>
-                <CustomeStatusBar backgroundColor={ colors.appColor } flagShowStatusBar={ true } barStyle="light-content" />
-                <Loader loading={ flag_Loading } color={ colors.appColor } size={ 30 } />
+                {/* <CustomeStatusBar backgroundColor={ colors.appColor } flagShowStatusBar={ true } barStyle="light-content" />
+                <Loader loading={ flag_Loading } color={ colors.appColor } size={ 30 } /> */}
             </Container>
         );
     }
