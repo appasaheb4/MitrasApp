@@ -24,6 +24,9 @@ var images = {
     img1: require( assetsImages + "onboarding1.png" ),
     img2: require( assetsImages + "onboarding1.png" ),
     img3: require( assetsImages + "onboarding1.png" ),
+  },
+  feed: {
+    forCard: require( assetsImages + "forcard.png" ),
   }
 };
 

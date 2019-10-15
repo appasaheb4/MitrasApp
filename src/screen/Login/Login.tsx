@@ -44,7 +44,7 @@ import { StatusBar } from "mitrasCustStatusBar";
 
 
 //TODO: Custome Object 
-import { colors, images, apiary } from "mitrasConstants";
+import { colors, images, asyncStorageKeys } from "mitrasConstants";
 
 //TODO: Custome Validation
 import { validationService } from "mitrasValidation";
@@ -83,7 +83,7 @@ export default class Login extends Component<Props, any> {
     //     } );
     // }
 
-    click_Next = () => {
+    click_Next = async () => {
         this.getFormValidation();
 
         const resetAction = StackActions.reset( {
@@ -96,6 +96,7 @@ export default class Login extends Component<Props, any> {
             ]
         } );
         this.props.navigation.dispatch( resetAction );
+        await AsyncStorage.setItem( asyncStorageKeys.rootViewController, "TabbarNavigator" );
         // const { inputs, itemSocietyName } = this.state;
         // console.log( { inputs } );
         // var isValid = true;

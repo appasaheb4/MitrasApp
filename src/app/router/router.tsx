@@ -16,15 +16,17 @@ import {
 // import { SvgIcon } from "mitrasCustSvgIcons";
 // //localization  
 
-//TODO: RestoreAndWalletSetupScreen
-import { OnBoarding } from "mitrasCompLanch";
-import { Login, Registration } from "mitrasCompLogin";
+//TODO: RestoreAndWalletSetupScreen    
+import { OnBoarding } from "mitrasScreenLanch";
 
-//TODO: Drawer
-import { Drawer } from "mitrasCompDrawer";
+import { Login, Registration } from "mitrasScreenLogin";
 
-//TODO: Tabbar
-import { Feeds } from "mitrasCompFeeds";
+//TODO: Drawer   
+import { Drawer } from "mitrasScreenDrawer";
+
+//TODO: Tabbar    
+import { Feeds } from "mitrasScreenTabbar/Feeds";
+import { Orders } from "mitrasScreenTabbar/Orders";
 
 
 
@@ -79,7 +81,7 @@ const TabNavigator = createBottomTabNavigator(
       }
     },
     Order: {
-      screen: Feeds,
+      screen: Orders,
       navigationOptions: {
         tabBarLabel: "Order",
         drawerLockMode: "locked-open",

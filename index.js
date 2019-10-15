@@ -9,7 +9,7 @@ import { name as appName } from './app.json';
 
 
 import { createRootNavigator } from "mitrasRouter";
-import { Launch } from "mitrasCompLanch";
+import { Launch } from "mitrasScreenLanch";
 
 
 //TODO: Redux
