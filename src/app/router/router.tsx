@@ -1,6 +1,5 @@
 import React from "react";
 import { View } from "react-native";
-import { Text } from "native-base";
 import { colors } from "mitrasConstants";
 
 
@@ -27,6 +26,15 @@ import { Drawer } from "mitrasScreenDrawer";
 //TODO: Tabbar    
 import { Feeds } from "mitrasScreenTabbar/Feeds";
 import { Orders } from "mitrasScreenTabbar/Orders";
+import { Profile } from "mitrasScreenTabbar/Profile";
+
+
+
+//TODO: Order Details
+import { OrderDetails } from "mitrasScreenDrawer/OrderDetails";
+
+
+
 
 
 
@@ -52,6 +60,20 @@ const OnBoardingStackNavigator = createStackNavigator(
   },
   {
     initialRouteName: "OnBoarding"
+  }
+);
+
+
+//TODO: Order Details
+const OrderDetailsStackNavigator = createStackNavigator(
+  {
+    OrderDetails: {
+      screen: OrderDetails,
+      navigationOptions: { header: null }
+    }
+  },
+  {
+    initialRouteName: "OrderDetails"
   }
 );
 
@@ -121,7 +143,7 @@ const TabNavigator = createBottomTabNavigator(
       }
     },
     Profile: {
-      screen: Feeds,
+      screen: Profile,
       navigationOptions: {
         tabBarLabel: "Profile",
         drawerLockMode: "locked-open",
@@ -197,6 +219,10 @@ export const createRootNavigator = (
       },
       TabbarNavigator: {
         screen: DrawerNavigator,
+        navigationOptions: { header: null }
+      },
+      OrderDetailsNavigator: {
+        screen: OrderDetailsStackNavigator,
         navigationOptions: { header: null }
       }
     },

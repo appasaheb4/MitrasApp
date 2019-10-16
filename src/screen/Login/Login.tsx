@@ -35,12 +35,12 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 
 
 
-import { ModelLoader } from "mitrasCustLoader";
+import { ModelLoader } from "mitrasComponents/Loader";
 
 //TODO: Custome Comp 
-import { FullLinearGradientButton } from "hexaCustomeLinearGradientButton";
-import { HeaderTitle } from "mitrasCustHeader";
-import { StatusBar } from "mitrasCustStatusBar";
+import { FullLinearGradientButton } from "mitrasComponents/LinearGradient/Button";
+import { HeaderTitle } from "mitrasComponents/Header";
+import { StatusBar } from "mitrasComponents/StatusBar";
 
 
 //TODO: Custome Object 
@@ -48,7 +48,7 @@ import { colors, images, asyncStorageKeys } from "mitrasConstants";
 
 //TODO: Custome Validation
 import { validationService } from "mitrasValidation";
-import utils from "mitrasUtils";
+
 
 
 interface Props {

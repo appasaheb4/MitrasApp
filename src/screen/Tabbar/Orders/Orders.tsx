@@ -41,7 +41,7 @@ import Active from "./Active"
 import Post from "./Post";
 
 //TODO: Custome Comp
-import { StatusBar } from "mitrasCustStatusBar";
+import { StatusBar } from "mitrasComponents/StatusBar";
 
 //TODO:Custome Object
 import { colors, images } from "mitrasConstants";
@@ -189,7 +189,7 @@ export default class Orders extends Component {
                             tabStyle={ { backgroundColor: colors.appColor } }
                             activeTabStyle={ { backgroundColor: colors.appColor } }
                         >
-                            <Active />
+                            <Active push={ () => this.props.navigation.push( "OrderDetailsNavigator" ) } />
                         </Tab>
                         <Tab heading="Post"
                             tabStyle={ { backgroundColor: colors.appColor } }

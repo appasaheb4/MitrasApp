@@ -7,16 +7,15 @@ import {
   Animated,
   Easing,
   Image,
-
 } from "react-native";
 import { Text } from "native-base";
 import LinearGradient from "react-native-linear-gradient";
 
-import { colors, images, asyncStorageKeys } from "mitrasConstants";
-import Singleton from "mitrasSingleton";
+import { images, asyncStorageKeys } from "mitrasConstants";
+
 
 //TODO: Custome Object   
-import { StatusBar } from "mitrasCustStatusBar";
+import { StatusBar } from "mitrasComponents/StatusBar";
 
 interface Props {
   onComplited: Function;

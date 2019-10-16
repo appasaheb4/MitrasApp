@@ -1,20 +1,16 @@
 import React from "react";
 import { StyleSheet, View, SafeAreaView, Image, AsyncStorage, Dimensions, Alert } from "react-native";
 import { Text, Button, Icon } from "native-base";
-import { StackActions, NavigationActions } from "react-navigation";
 import LinearGradient from "react-native-linear-gradient";
 import IconFontAwe from "react-native-vector-icons/FontAwesome";
 
 
 //Custome Compontes  
-import { StatusBar } from "mitrasCustStatusBar";
-import { OnBoardingSwip } from "mitrasCustOnBoarding";
-import { FullLinearGradientButton } from "mitrasCustomeLinearGradientButton";
-
+import { StatusBar } from "mitrasComponents/StatusBar";
+import { OnBoardingSwip } from "mitrasComponents/OnBoarding";
 
 //TODO: Custome object  
-import { colors, images, asyncStorageKeys } from "mitrasConstants";
-
+import { colors, images } from "mitrasConstants";
 
 
 export default class OnBoarding extends React.Component<any, any> {

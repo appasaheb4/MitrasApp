@@ -44,7 +44,7 @@ import Carousel, { Pagination } from "react-native-snap-carousel";
 import { RkCard } from "react-native-ui-kitten";
 
 //TODO: Custome Comp
-import { StatusBar } from "mitrasCustStatusBar";
+import { StatusBar } from "mitrasComponents/StatusBar";
 
 //TODO:Custome Object
 import { colors, images } from "mitrasConstants";

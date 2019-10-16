@@ -11,7 +11,8 @@ import {
     Linking,
     ScrollView,
     FlatList,
-    RefreshControl
+    RefreshControl,
+    TouchableHighlight
 } from "react-native";
 import {
     Container,
@@ -46,27 +47,28 @@ export default class Active extends Component {
     _renderItem( { item, index } ) {
         return (
             <View key={ "card" + index }>
-                <Card style={ styles.card }>
-                    <CardItem>
-                        <Left>
-                            <Avatar
-                                size={ 100 }
-                                source={ {
-                                    uri:
-                                        'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
-                                } }
-                            />
-                        </Left>
-                        <Body>
-                            <Text>Order Id: 1234</Text>
-                            <Text note>Items: 3</Text>
-                            <Text note>Date: 15/10/2019</Text>
-                        </Body>
-                        <Right>
-                            <Icon type="FontAwesome5" name="comment" />
-                        </Right>
-                    </CardItem>
-
+                <Card style={ styles.card } >
+                    <TouchableHighlight onPress={ () => this.props.push() } >
+                        <CardItem>
+                            <Left>
+                                <Avatar
+                                    size={ 100 }
+                                    source={ {
+                                        uri:
+                                            'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
+                                    } }
+                                />
+                            </Left>
+                            <Body>
+                                <Text>Order Id: 1234</Text>
+                                <Text note>Items: 3</Text>
+                                <Text note>Date: 15/10/2019</Text>
+                            </Body>
+                            <Right>
+                                <Icon type="FontAwesome5" name="comment" />
+                            </Right>
+                        </CardItem>
+                    </TouchableHighlight>
                 </Card>
             </View>
         );
