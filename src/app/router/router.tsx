@@ -24,7 +24,7 @@ import { Login, Registration } from "mitrasScreenLogin";
 import { Drawer } from "mitrasScreenDrawer";
 
 //TODO: Tabbar    
-import { Feeds } from "mitrasScreenTabbar/Feeds";
+import { Feeds, PostAdd } from "mitrasScreenTabbar/Feeds";
 import { Orders } from "mitrasScreenTabbar/Orders";
 import { Profile } from "mitrasScreenTabbar/Profile";
 
@@ -63,6 +63,18 @@ const OnBoardingStackNavigator = createStackNavigator(
   }
 );
 
+//TODO: Post Add
+const PostAddStackNavigator = createStackNavigator(
+  {
+    PostAdd: {
+      screen: PostAdd,
+      navigationOptions: { header: null }
+    }
+  },
+  {
+    initialRouteName: "PostAdd"
+  }
+);
 
 //TODO: Order Details
 const OrderDetailsStackNavigator = createStackNavigator(
@@ -223,6 +235,10 @@ export const createRootNavigator = (
       },
       OrderDetailsNavigator: {
         screen: OrderDetailsStackNavigator,
+        navigationOptions: { header: null }
+      },
+      PostAddNavigator: {
+        screen: PostAddStackNavigator,
         navigationOptions: { header: null }
       }
     },

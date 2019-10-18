@@ -36,7 +36,7 @@ import {
 } from "native-base";
 
 //TODO: Custome Comp
-import { HeaderTitle } from "mitrasComponents/Header";
+import { HeaderTitleWithRightIcon } from "mitrasComponents/Header";
 import { StatusBar } from "mitrasComponents/StatusBar";
 
 //TODO:Custome Object       
@@ -53,7 +53,12 @@ export default class OrderDetails extends Component {
     render() {
         return (
             <Container>
-                <HeaderTitle title="Manage Account"
+                <HeaderTitleWithRightIcon
+                    headerDetails={ {
+                        title: "Order Details",
+                        flagTransparent: false,
+                        headerBgColor: colors.appColor
+                    } }
                     pop={ () => this.props.navigation.pop() }
                 />
                 <SafeAreaView style={ [ styles.container, { backgroundColor: 'transparent' } ] }>

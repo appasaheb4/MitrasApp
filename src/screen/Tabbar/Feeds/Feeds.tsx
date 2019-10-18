@@ -235,6 +235,16 @@ export default class Feeds extends Component {
                             keyExtractor={ ( item, index ) => index.toString() }
                         />
                     </View>
+
+                    <Fab
+                        active={ true }
+                        direction="up"
+                        hitSlop={ { top: 20, bottom: 10, left: 20, right: -20 } }
+                        style={ [ styles.plusButtonBottom, { backgroundColor: colors.appColor } ] }
+                        position="bottomRight"
+                        onPress={ () => this.props.navigation.push( "PostAddNavigator" ) }>
+                        <IconFontAwe name="camera" size={ 25 } color={ colors.appColor } />
+                    </Fab>
                 </Content>
 
 
@@ -263,5 +273,9 @@ let styles = StyleSheet.create( {
     },
     paginationContainer: {
         marginBottom: -10
+    },
+    plusButtonBottom: {
+        position: "absolute",
+        bottom: 20,
     },
 } );
