@@ -46,7 +46,6 @@ export default class PostAdd extends Component {
 
     }
 
-
     render() {
         return (
             <Container>

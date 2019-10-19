@@ -190,10 +190,14 @@ keyAlias "mitras"
             }
 
         }
-    }
+    }     
 }
 
-dependencies {
+dependencies {   
+      // animation image like gif
+    compile 'com.facebook.fresco:animated-gif:1.+'
+    compile 'com.facebook.fresco:animated-webp:1.+'
+    compile 'com.facebook.fresco:webpsupport:1.+'
      compile('com.crashlytics.sdk.android:crashlytics:2.9.9@aar') {
     transitive = true;
     } 

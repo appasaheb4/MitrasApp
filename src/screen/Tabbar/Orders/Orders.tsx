@@ -195,7 +195,7 @@ export default class Orders extends Component {
                             tabStyle={ { backgroundColor: colors.appColor } }
                             activeTabStyle={ { backgroundColor: colors.appColor } }
                         >
-                            <Post />
+                            <Post push={ () => this.props.navigation.push( "OrderDetailsNavigator" ) } />
                         </Tab>
                     </Tabs>
                 </Content>
