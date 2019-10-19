@@ -23,23 +23,17 @@ import { Login, Registration } from "mitrasScreenLogin";
 //TODO: Drawer   
 import { Drawer } from "mitrasScreenDrawer";
 
-//TODO: Tabbar    
-import { Feeds, PostAdd } from "mitrasScreenTabbar/Feeds";
-import { Orders } from "mitrasScreenTabbar/Orders";
-import { Profile } from "mitrasScreenTabbar/Profile";
+//TODO: Tabbar User   
+import { Feeds, PostAdd } from "mitrasScreenTabbar/User/Feeds";
+import { Orders } from "mitrasScreenTabbar/User/Orders";
+import { Profile } from "mitrasScreenTabbar/User/Profile";
 
-
+//TODO: Tabar Admin
+import { Customers } from "mitrasScreenTabbar/Admin/Customers";
+import { Order } from "mitrasScreenTabbar/Admin/Order";
 
 //TODO: Order Details
 import { OrderDetails } from "mitrasScreenDrawer/OrderDetails";
-
-
-
-
-
-
-
-
 
 
 //TODO: StackNavigator:ONBoarding
@@ -90,7 +84,7 @@ const OrderDetailsStackNavigator = createStackNavigator(
 );
 
 // Tabbar
-const TabNavigator = createBottomTabNavigator(
+const UserTabNavigator = createBottomTabNavigator(
   {
     Feeds: {
       screen: Feeds,
@@ -187,10 +181,10 @@ const TabNavigator = createBottomTabNavigator(
 
 
 //TODO: DrawerNavigator
-const DrawerNavigator = createDrawerNavigator(
+const UserDrawerNavigator = createDrawerNavigator(
   {
     TabNavigator: {
-      screen: TabNavigator,
+      screen: UserTabNavigator,
       navigationOptions: {
         drawerLabel: "Feeds",
         drawerIcon: ( { tintColor } ) => <IconFontAwe name="home" size={ 17 } />
@@ -217,6 +211,104 @@ const DrawerNavigator = createDrawerNavigator(
 
 
 
+// Tabbar
+const CustomersTabNavigator = createBottomTabNavigator(
+  {
+    Order: {
+      screen: Order,
+      navigationOptions: {
+        tabBarLabel: "Order",
+        drawerLockMode: "locked-open",
+        tabBarIcon: ( { tintColor } ) => (
+          <IconFontAwe name="home" color={ tintColor } size={ 22 } />
+        )
+
+      }
+    },
+    Add: {
+      screen: Customers,
+      navigationOptions: {
+        tabBarLabel: " ",
+        showLabel: false,
+        drawerLockMode: "locked-open",
+        tabBarIcon: ( { tintColor } ) => (
+          <View>
+            <IconFontAwe name="plus-circle" color={ "#FF7C02" } style={ { marginTop: 10 } } size={ 40 } />
+          </View>
+
+        )
+
+      }
+    },
+    Customers: {
+      screen: Customers,
+      navigationOptions: {
+        tabBarLabel: "Customers",
+        drawerLockMode: "locked-open",
+        tabBarIcon: ( { tintColor } ) => (
+          <View>
+            <IconFontAwe name="user" color={ tintColor } size={ 22 } />
+          </View>
+
+        )
+
+      }
+    }
+  },
+  {
+    initialRouteName: "Customers",
+    tabBarOptions: {
+      showLabel: true,
+      //swipeEnabled: true,
+      showIcon: true,
+      activeTintColor: "#ffffff",
+      labelStyle: {
+        fontSize: 11,
+        fontFamily: "FiraSans-Medium"
+      },
+      style: {
+        backgroundColor: colors.appColor
+      },
+      tabStyle: {}
+    }
+  }
+);
+
+
+//TODO: DrawerNavigator
+const CustomersDrawerNavigator = createDrawerNavigator(
+  {
+    TabNavigator: {
+      screen: CustomersTabNavigator,
+      navigationOptions: {
+        drawerLabel: "Feeds",
+        drawerIcon: ( { tintColor } ) => <IconFontAwe name="home" size={ 17 } />
+      }
+    }
+  },
+  {
+    initialRouteName: "TabNavigator",
+    contentComponent: Drawer,
+    drawerPosition: "left",
+    drawerOpenRoute: "DrawerOpen",
+    drawerCloseRoute: "DrawerClose",
+    drawerToggleRoute: "DrawerToggle",
+    contentOptions: {
+      activeTintColor: "#3F51B5",
+      style: {
+        flex: 1,
+        paddingTop: 15
+      }
+    }
+  }
+);
+
+
+
+
+
+
+
 //TODO: RootNavigator  
 //TODO: RootNavigator:createRootNavigator
 export const createRootNavigator = (
@@ -229,8 +321,12 @@ export const createRootNavigator = (
         screen: OnBoardingStackNavigator,
         navigationOptions: { header: null }
       },
-      TabbarNavigator: {
-        screen: DrawerNavigator,
+      UserTabbarNavigator: {
+        screen: UserDrawerNavigator,
+        navigationOptions: { header: null }
+      },
+      CustomersTabbarNavigator: {
+        screen: CustomersDrawerNavigator,
         navigationOptions: { header: null }
       },
       OrderDetailsNavigator: {

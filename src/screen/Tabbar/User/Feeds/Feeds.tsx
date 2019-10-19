@@ -78,9 +78,6 @@ export default class Feeds extends Component {
 
 
 
-    componentWillMount() {
-        console.log( 'hi' );
-    }
 
 
 

@@ -85,74 +85,51 @@ export default class Login extends Component<Props, any> {
 
     click_Next = async () => {
         this.getFormValidation();
-
-        const resetAction = StackActions.reset( {
-            index: 0, // <-- currect active route from actions array
-            key: null,
-            actions: [
-                NavigationActions.navigate( {
-                    routeName: "TabbarNavigator"
-                } )
-            ]
-        } );
-        this.props.navigation.dispatch( resetAction );
-        await AsyncStorage.setItem( asyncStorageKeys.rootViewController, "TabbarNavigator" );
-        // const { inputs, itemSocietyName } = this.state;
-        // console.log( { inputs } );
-        // var isValid = true;
-        // for ( var i in inputs ) {
-        //     if ( inputs[ i ].hasOwnProperty( 'errorLabel' ) ) {
-        //         if ( inputs[ i ].errorLabel != null ) {
-        //             console.log( 'null' );
-        //             isValid = false;
-        //             break;
-        //         }
-        //     } else {
-        //         isValid = false;
-        //         break;
-        //     }
-        // }
-        // console.log( { isValid } );
-        // if ( isValid ) {
-        //     if ( inputs.password.value == inputs.confirmPassword.value ) {
-        //         this.setState( {
-        //             flag_Loading: true
-        //         } );
-        //         var body = {
-        //             date: Date.now(),
-        //             societyName: itemSocietyName,
-        //             name: inputs.name.value,
-        //             mobileNo: inputs.mobileNo.value,
-        //             tokenNo: utils.getTokenNo(),
-        //             password: inputs.confirmPassword.value,
-        //             type: "guard"
-        //         };
-        //         console.log( { body } );
-        //         axios( {
-        //             method: "post",
-        //             url: apiary.registration,
-        //             data: body
-        //         } )
-        //             .then( ( response: any ) => {
-        //                 let data = response.data;
-        //                 console.log( { data } );
-        //                 if ( data.statusCode == 200 ) {
-        //                     this.props.click_Next( inputs.mobileNo.value, data.data.otp );
-        //                 } else {
-        //                     Alert.alert( data.msg );
-        //                 }
-        //                 this.setState( {
-        //                     flag_Loading: false
-        //                 } );
-        //             } )
-        //             .catch( function ( error: any ) {
-        //                 console.log( error );
-        //             } );
-
-        //     } else {
-        //         Alert.alert( 'Please enter correct password and confirm password.' );
-        //     }
-        // }
+        const { inputs, itemSocietyName } = this.state;
+        console.log( { inputs } );
+        var isValid = true;
+        for ( var i in inputs ) {
+            if ( inputs[ i ].hasOwnProperty( 'errorLabel' ) ) {
+                if ( inputs[ i ].errorLabel != null ) {
+                    console.log( 'null' );
+                    isValid = false;
+                    break;
+                }
+            } else {
+                isValid = false;
+                break;
+            }
+        }
+        console.log( { isValid } );
+        if ( isValid ) {
+            if ( inputs.mobileNo.value == "1234567890" && inputs.password.value == "123456" ) {
+                const resetAction = StackActions.reset( {
+                    index: 0, // <-- currect active route from actions array
+                    key: null,
+                    actions: [
+                        NavigationActions.navigate( {
+                            routeName: "CustomersTabbarNavigator"
+                        } )
+                    ]
+                } );
+                this.props.navigation.dispatch( resetAction );
+                await AsyncStorage.setItem( asyncStorageKeys.rootViewController, "CustomersTabbarNavigator" );
+            } else {
+                const resetAction = StackActions.reset( {
+                    index: 0, // <-- currect active route from actions array
+                    key: null,
+                    actions: [
+                        NavigationActions.navigate( {
+                            routeName: "UserTabbarNavigator"
+                        } )
+                    ]
+                } );
+                this.props.navigation.dispatch( resetAction );
+                await AsyncStorage.setItem( asyncStorageKeys.rootViewController, "UserTabbarNavigator" );
+            }
+        } else {
+            Alert.alert( "Please enter correct mobile no and password." )
+        }
     }
 
     //TODO: Validation
