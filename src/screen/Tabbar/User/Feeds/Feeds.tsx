@@ -43,6 +43,7 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import Carousel, { Pagination } from "react-native-snap-carousel";
 import { RkCard } from "react-native-ui-kitten";
 
+
 //TODO: Custome Comp
 import { StatusBar } from "mitrasComponents/StatusBar";
 
@@ -83,7 +84,7 @@ export default class Feeds extends Component {
 
     _renderItem( { item, index } ) {
         return (
-            <View key={ "card" + index } >
+            <View key={ "card" + index } style={ { height: Dimensions.get( 'screen' ).width - 210, } } >
                 <Card style={ styles.rkCard }>
                     <ImageBackground
                         source={ images.feed.forCard }
@@ -116,7 +117,7 @@ export default class Feeds extends Component {
 
     renderItemForFeeds( { item, index } ) {
         return (
-            <View key={ "card" + index } style={ { height: 250, alignItems: "center" } }>
+            <View key={ "card" + index } style={ { height: Dimensions.get( 'screen' ).width - 140, alignItems: "center" } }>
                 <View style={ { flexDirection: "row" } }>
                     <Text style={ { flex: 1, alignSelf: 'flex-start' } }>{ item.title }</Text>
                     <Text note style={ { flex: 0.4, textAlign: "right" } }>{ item.subTitle }</Text>
@@ -184,55 +185,59 @@ export default class Feeds extends Component {
                 <Content
                     contentContainerStyle={ styles.container }
                 >
-                    <View style={ { flex: 1, marginTop: 10 } }>
-                        <Carousel
-                            ref={ c => {
-                                this._carousel = c;
-                            } }
-                            data={ [ 1, 2, 3, 4 ] }
-                            renderItem={ this._renderItem.bind( this ) }
-                            sliderWidth={ sliderWidth }
-                            itemWidth={ itemWidth }
-                            loop={ true }
-                            autoplay={ true }
-                            autoplayDelay={ 10000 }
-                            autoplayInterval={ 5000 }
-                            onSnapToItem={ ( index: any ) => console.log( { index } )
-                            }
+                    <KeyboardAwareScrollView
+                        enableOnAndroid
+                        extraScrollHeight={ 0 }
+                        contentContainerStyle={ { flexGrow: 1 } }
+                    >
+                        <View style={ { flex: 1, marginTop: 10 } }>
+                            <Carousel
+                                ref={ c => {
+                                    this._carousel = c;
+                                } }
+                                data={ [ 1, 2, 3, 4 ] }
+                                renderItem={ this._renderItem.bind( this ) }
+                                sliderWidth={ sliderWidth }
+                                itemWidth={ itemWidth }
+                                loop={ true }
+                                autoplay={ true }
+                                autoplayDelay={ 10000 }
+                                autoplayInterval={ 5000 }
+                                onSnapToItem={ ( index: any ) => console.log( { index } )
+                                }
 
-                        />
-                        <Pagination
-                            dotsLength={ [ 1, 2, 3, 4 ].length }
-                            activeDotIndex={ slider1ActiveSlide }
-                            containerStyle={ styles.paginationContainer }
-                            dotColor={ "rgba(255, 255, 255, 0.92)" }
-                            inactiveDotColor={ colors.black }
-                            inactiveDotOpacity={ 0.4 }
-                            inactiveDotScale={ 0.6 }
-                            carouselRef={ this._slider1Ref }
-                            tappableDots={ !!this._slider1Ref }
-                        />
-                    </View>
-
-                    <View style={ { flex: 1.5, margin: 20 } } >
-                        <FlatList
-                            data={ [ { title: "Feed", subTitle: "INR 1000" }, { title: "Product", subTitle: "INR 500" }, ] }
-                            refreshControl={
-                                <RefreshControl
-                                    refreshing={ false }
-                                    onRefresh={ () => {
-                                        this.componentWillMount()
-                                    } }
-                                />
-                            }
-                            scrollEnabled={ true }
-                            showsVerticalScrollIndicator={ false }
-                            style={ { flex: 1 } }
-                            renderItem={ this.renderItemForFeeds.bind( this ) }
-                            keyExtractor={ ( item, index ) => index.toString() }
-                        />
-                    </View>
-
+                            />
+                            <Pagination
+                                dotsLength={ [ 1, 2, 3, 4 ].length }
+                                activeDotIndex={ slider1ActiveSlide }
+                                containerStyle={ styles.paginationContainer }
+                                dotColor={ "rgba(255, 255, 255, 0.92)" }
+                                inactiveDotColor={ colors.black }
+                                inactiveDotOpacity={ 0.4 }
+                                inactiveDotScale={ 0.6 }
+                                carouselRef={ this._slider1Ref }
+                                tappableDots={ !!this._slider1Ref }
+                            />
+                        </View>
+                        <View style={ { flex: 1, margin: 20 } } >
+                            <FlatList
+                                data={ [ { title: "Feed", subTitle: "INR 1000" }, { title: "Product", subTitle: "INR 500" }, ] }
+                                refreshControl={
+                                    <RefreshControl
+                                        refreshing={ false }
+                                        onRefresh={ () => {
+                                            // this.componentWillMount()
+                                        } }
+                                    />
+                                }
+                                scrollEnabled={ false }
+                                showsVerticalScrollIndicator={ false }
+                                style={ { flex: 1 } }
+                                renderItem={ this.renderItemForFeeds.bind( this ) }
+                                keyExtractor={ ( item, index ) => index.toString() }
+                            />
+                        </View>
+                    </KeyboardAwareScrollView>
                     <Fab
                         active={ true }
                         direction="up"
@@ -243,8 +248,6 @@ export default class Feeds extends Component {
                         <IconFontAwe name="camera" size={ 25 } color={ colors.appColor } />
                     </Fab>
                 </Content>
-
-
                 <StatusBar backgroundColor={ colors.appColor } hidden={ false } barStyle="light-content" />
             </Container>
         );

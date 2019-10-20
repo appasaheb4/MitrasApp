@@ -25,6 +25,8 @@ import { Drawer } from "mitrasScreenDrawer";
 
 //TODO: Tabbar User   
 import { Feeds, PostAdd } from "mitrasScreenTabbar/User/Feeds";
+import { Favourite } from "mitrasScreenTabbar/User/Favourite";
+import { Inbox } from "mitrasScreenTabbar/User/Inbox";
 import { Orders } from "mitrasScreenTabbar/User/Orders";
 import { Profile } from "mitrasScreenTabbar/User/Profile";
 
@@ -98,7 +100,7 @@ const UserTabNavigator = createBottomTabNavigator(
       }
     },
     Fav: {
-      screen: Feeds,
+      screen: Favourite,
       navigationOptions: {
         tabBarLabel: "Fav",
         drawerLockMode: "locked-open",
@@ -129,7 +131,7 @@ const UserTabNavigator = createBottomTabNavigator(
       }
     },
     Inbox: {
-      screen: Feeds,
+      screen: Inbox,
       navigationOptions: {
         tabBarLabel: "Inbox",
         drawerLockMode: "locked-open",

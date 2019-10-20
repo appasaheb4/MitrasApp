@@ -36,9 +36,13 @@ import {
     CheckBox
 } from "native-base";
 import Accordion from 'react-native-collapsible/Accordion';
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+
+
 //TODO: Custome Comp
 import { HeaderTitleWithRightIcon } from "mitrasComponents/Header";
 import { StatusBar } from "mitrasComponents/StatusBar";
+
 
 
 //TODO:Custome Object       
@@ -140,62 +144,68 @@ export default class OrderDetails extends Component {
                     <Content
                         contentContainerStyle={ styles.container }
                     >
-                        <View style={ { flex: 0.1, margin: 20 } }>
-                            <View style={ { flexDirection: "row" } }>
-                                <Text style={ { flex: 1, textAlign: "left" } }>Order Id:1</Text>
-                                <Text note style={ { flex: 1, textAlign: "right" } }>Due:18/10/2019</Text>
+                        <KeyboardAwareScrollView
+                            enableOnAndroid
+                            extraScrollHeight={ 0 }
+                            contentContainerStyle={ { flexGrow: 1 } }
+                        >
+                            <View style={ { flex: 0.1, margin: 20 } }>
+                                <View style={ { flexDirection: "row" } }>
+                                    <Text style={ { flex: 1, textAlign: "left" } }>Order Id:1</Text>
+                                    <Text note style={ { flex: 1, textAlign: "right" } }>Due:18/10/2019</Text>
+                                </View>
+                                <Text>Estimate: INR 2000</Text>
                             </View>
-                            <Text>Estimate: INR 2000</Text>
-                        </View>
-                        <View style={ { flex: 1 } }>
-                            <Accordion
-                                sections={ SECTIONS }
-                                activeSections={ this.state.activeSections }
-                                renderHeader={ this._renderHeader }
-                                renderContent={ this._renderContent }
-                                onChange={ this._updateSections }
-                            />
-                            <Card>
-                                <CardItem>
-                                    <Body>
-                                        <View style={ { flexDirection: "row" } }>
-                                            <Text style={ { flex: 1, textAlign: "left" } }>Status: Ready</Text>
-                                            <Text style={ { flex: 1, textAlign: "right" } }>19/10/2019</Text>
-                                        </View>
+                            <View style={ { flex: 1 } }>
+                                <Accordion
+                                    sections={ SECTIONS }
+                                    activeSections={ this.state.activeSections }
+                                    renderHeader={ this._renderHeader }
+                                    renderContent={ this._renderContent }
+                                    onChange={ this._updateSections }
+                                />
+                                <Card>
+                                    <CardItem>
+                                        <Body>
+                                            <View style={ { flexDirection: "row" } }>
+                                                <Text style={ { flex: 1, textAlign: "left" } }>Status: Ready</Text>
+                                                <Text style={ { flex: 1, textAlign: "right" } }>19/10/2019</Text>
+                                            </View>
 
-                                    </Body>
+                                        </Body>
 
-                                </CardItem>
-                                <CardItem>
-                                    <Body>
-                                        <Text>
-                                            This library heavily depends on the overflow style property.
-                                             Unfortunately, overflow defaults to hidden on Android and cannot be changed.
-                                              Although it looks like a possible fix is in the making, currently,
-                                              FoldingView is only supported on iOS.
+                                    </CardItem>
+                                    <CardItem>
+                                        <Body>
+                                            <Text>
+                                                This library heavily depends on the overflow style property.
+                                                 Unfortunately, overflow defaults to hidden on Android and cannot be changed.
+                                                  Although it looks like a possible fix is in the making, currently,
+                                                  FoldingView is only supported on iOS.
                                         </Text>
-                                    </Body>
-                                </CardItem>
-                            </Card>
-                            <Card>
-                                <CardItem>
-                                    <Body>
-                                        <View style={ { flexDirection: "row" } }>
-                                            <Text style={ { flex: 1, textAlign: "left" } }>Status: Delivered</Text>
-                                            <Text style={ { flex: 1, textAlign: "right" } }>20/10/2019</Text>
-                                        </View>
+                                        </Body>
+                                    </CardItem>
+                                </Card>
+                                <Card>
+                                    <CardItem>
+                                        <Body>
+                                            <View style={ { flexDirection: "row" } }>
+                                                <Text style={ { flex: 1, textAlign: "left" } }>Status: Delivered</Text>
+                                                <Text style={ { flex: 1, textAlign: "right" } }>20/10/2019</Text>
+                                            </View>
 
-                                    </Body>
-                                </CardItem>
-                                <CardItem>
-                                    <Body>
-                                        <Text>
-                                            Paid:2000
+                                        </Body>
+                                    </CardItem>
+                                    <CardItem>
+                                        <Body>
+                                            <Text>
+                                                Paid:2000
                                         </Text>
-                                    </Body>
-                                </CardItem>
-                            </Card>
-                        </View>
+                                        </Body>
+                                    </CardItem>
+                                </Card>
+                            </View>
+                        </KeyboardAwareScrollView>
                     </Content>
                 </SafeAreaView>
                 <StatusBar backgroundColor={ colors.appColor } hidden={ false } barStyle="light-content" />

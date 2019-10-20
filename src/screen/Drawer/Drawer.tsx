@@ -23,30 +23,88 @@ import {
   Right,
   Thumbnail
 } from "native-base";
-import Icon from "react-native-vector-icons/FontAwesome5";
-import { Avatar } from 'react-native-elements';
+import IconFontAwe from "react-native-vector-icons/FontAwesome";
+
+
+//TODO: Custome Alert 
+import { AlertSimple } from "mitrasComponents/Alert";
+let alert = new AlertSimple();
 
 
 
 
+//TODO: Custome Object 
+import { asyncStorageKeys } from "mitrasConstants";
 
 export default class Drawer extends Component<any, any> {
   constructor ( props ) {
     super( props );
     this.state = ( {
-
+      menuItem: [],
     } );
   }
 
+  async componentWillMount() {
+    var menuItem = [];
+    menuItem = [
+      { title: "Home", icon: "home" },
+      { title: "Logout", icon: "sign-out" } ]
+    this.setState( {
+      menuItem
+    } )
+  }
+
+  //TODO: func
+  //TODO:  function NavigateToScreen
+  navigateToScreen = async ( title: any ) => {
+    this.props.navigation.dispatch( DrawerActions.closeDrawer() );
+    if ( title == "Logout" ) {
+      alert.simpleOkActionWithPara( "Confirm", "Are you sure logout ?", null, this.click_Logout )
+    } else if ( title == "Home" ) {
+      console.log( 'home navigation' );
+    }
+    else {
+      console.log( title );
+      Alert.alert( 'coming soon' );
+    }
+  }
+
+  click_Logout = async () => {
+    const resetAction = StackActions.reset( {
+      index: 0, // <-- currect active route from actions array
+      key: null,
+      actions: [
+        NavigationActions.navigate( {
+          routeName: "OnBoardingNavigator"
+        } )
+      ]
+    } );
+    await AsyncStorage.setItem( asyncStorageKeys.rootViewController, "OnBoardingNavigator" );
+    this.props.navigation.dispatch( resetAction );
+  }
 
 
   render() {
+    //array  
+    let { menuItem } = this.state;
     return (
       <Container>
         <Content contentContainerStyle={ styles.container }>
           <ScrollView style={ styles.viewScrollingList }>
             <View>
-              <Text>Comming soon</Text>
+              <FlatList
+                data={ menuItem }
+                showsVerticalScrollIndicator={ false }
+                renderItem={ ( { item } ) => (
+                  <TouchableOpacity onPress={ () => this.navigateToScreen( item.title ) }>
+                    <View style={ styles.menuItem }>
+                      <IconFontAwe name={ item.icon } size={ 20 } />
+                      <Text style={ styles.txtMenuItem }>{ item.title }</Text>
+                    </View>
+                  </TouchableOpacity>
+                ) }
+                keyExtractor={ item => item.id }
+              />
             </View>
           </ScrollView>
         </Content>
@@ -99,6 +157,6 @@ const styles = StyleSheet.create( {
   },
   //Scrolling:viewScrollingList
   viewScrollingList: {
-    flex: 1
+    flex: 1, marginTop: 25
   }
 } );

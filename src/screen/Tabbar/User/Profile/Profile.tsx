@@ -41,6 +41,7 @@ import ImagePicker from 'react-native-image-picker';
 
 
 
+
 export default class Profile extends Component {
     constructor ( props: any ) {
         super( props );
@@ -104,7 +105,7 @@ export default class Profile extends Component {
                     <Content
                         contentContainerStyle={ styles.container }
                     >
-                        <View style={ { flex: 0.4, zIndex: 1, paddingTop: 80, alignItems: "center", backgroundColor: "#F4F4F4" } }>
+                        <View style={ { flex: 0.8, zIndex: 1, paddingTop: 80, alignItems: "center", backgroundColor: "#F4F4F4" } }>
                             <TouchableOpacity onPress={ () => this.click_SelectImage() }>
                                 <Avatar
                                     size="large"

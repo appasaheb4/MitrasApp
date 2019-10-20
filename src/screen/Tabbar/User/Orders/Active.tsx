@@ -88,7 +88,7 @@ export default class Active extends Component {
                                 <RefreshControl
                                     refreshing={ false }
                                     onRefresh={ () => {
-                                        this.componentWillMount()
+                                        // this.componentWillMount()
                                     } }
                                 />
                             }

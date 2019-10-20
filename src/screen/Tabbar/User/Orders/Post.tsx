@@ -89,7 +89,7 @@ export default class Post extends Component {
                                 <RefreshControl
                                     refreshing={ false }
                                     onRefresh={ () => {
-                                        this.componentWillMount()
+                                        // this.componentWillMount()
                                     } }
                                 />
                             }
