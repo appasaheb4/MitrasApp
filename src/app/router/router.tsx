@@ -1,5 +1,5 @@
 import React from "react";
-import { View } from "react-native";
+import { View, TouchableHighlight } from "react-native";
 import { colors } from "mitrasConstants";
 
 
@@ -30,12 +30,16 @@ import { Inbox } from "mitrasScreenTabbar/User/Inbox";
 import { Orders } from "mitrasScreenTabbar/User/Orders";
 import { Profile } from "mitrasScreenTabbar/User/Profile";
 
+//TODO: Order Details
+import { OrderDetails } from "mitrasScreenDrawer/User/OrderDetails";
+
 //TODO: Tabar Admin
 import { Customers } from "mitrasScreenTabbar/Admin/Customers";
 import { Order } from "mitrasScreenTabbar/Admin/Order";
 
-//TODO: Order Details
-import { OrderDetails } from "mitrasScreenDrawer/OrderDetails";
+import { NewOrder } from "mitrasScreenDrawer/Admin/NewOrder"
+
+
 
 
 //TODO: StackNavigator:ONBoarding
@@ -58,6 +62,8 @@ const OnBoardingStackNavigator = createStackNavigator(
     initialRouteName: "OnBoarding"
   }
 );
+
+// User StackNavigator
 
 //TODO: Post Add
 const PostAddStackNavigator = createStackNavigator(
@@ -212,6 +218,21 @@ const UserDrawerNavigator = createDrawerNavigator(
 
 
 
+//Admin Stack Navigator
+
+const NewOrderStackNavigator = createStackNavigator(
+  {
+    NewOrder: {
+      screen: NewOrder,
+      navigationOptions: { header: null }
+    }
+  },
+  {
+    initialRouteName: "NewOrder"
+  }
+);
+
+
 
 // Tabbar
 const CustomersTabNavigator = createBottomTabNavigator(
@@ -228,18 +249,18 @@ const CustomersTabNavigator = createBottomTabNavigator(
       }
     },
     Add: {
-      screen: Customers,
+      screen: NewOrderStackNavigator,
       navigationOptions: {
         tabBarLabel: " ",
         showLabel: false,
         drawerLockMode: "locked-open",
         tabBarIcon: ( { tintColor } ) => (
           <View>
+
             <IconFontAwe name="plus-circle" color={ "#FF7C02" } style={ { marginTop: 10 } } size={ 40 } />
+
           </View>
-
         )
-
       }
     },
     Customers: {
@@ -337,6 +358,10 @@ export const createRootNavigator = (
       },
       PostAddNavigator: {
         screen: PostAddStackNavigator,
+        navigationOptions: { header: null }
+      },
+      NewOrderNavigator: {
+        screen: NewOrderStackNavigator,
         navigationOptions: { header: null }
       }
     },

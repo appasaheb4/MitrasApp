@@ -45,10 +45,14 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import Carousel, { Pagination } from "react-native-snap-carousel";
 import { RkCard } from "react-native-ui-kitten";
 
-//TODO: Custome Comp   
+// TODO: Custome Comp   
 import { StatusBar } from "mitrasComponents/StatusBar";
 
-//TODO:Custome Object
+
+// TODO: Custome Model  
+import { ModelChangeStatus, ModelStausReady, ModelStatusDelivered } from "mitrasComponents/Models"
+
+// TODO:Custome Object
 import { colors, images } from "mitrasConstants";
 
 
@@ -56,36 +60,51 @@ export default class New extends Component {
     constructor ( props: any ) {
         super( props );
         this.state = ( {
-
+            arrModelChangeStatus:[],
+            arrModelStausReady:[],
+            arrModelStatusDelivered:[]
         } );
     }
 
     componentDidMount() {
         console.log( 'reload' );
     }
-
-
+   
     renderItem = () => {
         return (
             <View>
-                <Card>
+                <Card>   
                     <ListItem avatar>
                         <Left style={ { alignSelf: "center" } }>
                             <IconFontAwe color="gray" size={ 30 } name="shopping-cart" />
-                        </Left>
+                        </Left>  
                         <Body>
                             <Text>Kumar Pratik</Text>
                             <Text note>Doing what you like will always keep you happy . .</Text>
                         </Body>
-
+                        <Right>
+                            <Button 
+                            rounded 
+                            onPress={()=>{
+                                this.setState({
+                                    arrModelChangeStatus:{
+                                        modalVisible:true
+                                    }  
+                                })
+                            }}
+                            >
+                                <Text>Status</Text>
+                            </Button>
+                        </Right>
                     </ListItem>
-
                 </Card>
             </View>
         )
-    }
+    }   
 
     render() {
+        //array
+        let { arrModelChangeStatus, arrModelStausReady, arrModelStatusDelivered} = this.state;
         //values
         return (
             <Container>
@@ -122,7 +141,58 @@ export default class New extends Component {
                             renderItem={ this.renderItem.bind( this ) }
                             keyExtractor={ ( item, index ) => index.toString() }
                         />
-                    </View>
+                    </View>   
+                    <ModelChangeStatus   
+                        modelData={ arrModelChangeStatus}   
+                        click_Clsoe={()=>{  
+                            this.setState({
+                                arrModelChangeStatus: {
+                                    modalVisible: false
+                                }
+                            })
+                        }}
+                        click_Ready={()=>{
+                            this.setState( {
+                                arrModelChangeStatus: {
+                                    modalVisible: false
+                                },  
+                                arrModelStausReady:{
+                                    modalVisible: true
+                                }
+                            } )
+                        }}
+                        
+                        click_Delivered={()=>{
+                            this.setState({
+                                arrModelChangeStatus: {
+                                    modalVisible: false
+                                },  
+                                arrModelStatusDelivered:{
+                                    modalVisible: true
+                                }  
+                            })
+                        }}
+                    />  
+                    <ModelStausReady
+                        modelData={ arrModelStausReady}
+                        click_Clsoe={()=>{
+                            this.setState({
+                                arrModelStausReady: {
+                                    modalVisible: false
+                                } 
+                            })
+                        }}
+                    />
+                    <ModelStatusDelivered   
+                        modelData={arrModelStatusDelivered}
+                        click_Clsoe={ () => {
+                            this.setState( {  
+                                arrModelStatusDelivered: {
+                                    modalVisible: false
+                                }
+                            } )
+                        } }
+                    />  
                 </Content>
             </Container>
         );

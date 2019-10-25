@@ -26,6 +26,11 @@ const getUnixToNormaDateFormat = unixDate => {
 
 };
 
+const getDateForYYYYMMDD = ( unixDate: any ) => {
+  console.log( { unixDate } );
+  return moment.unix( unixDate ).format( "YYYY-MM-DD" );
+};
+
 const getUnixToDateFormat1 = () => {
   return moment().format( 'hh:mm a , DD MMM YYYY' );
 }
@@ -312,6 +317,7 @@ module.exports = {
   getUnixToNormaDateFormat,
   getUnixToDateFormat1,
   getUnixToDateFormat2,
+  getDateForYYYYMMDD,
   encrypt,
   encryptAgain,
   decrypt,

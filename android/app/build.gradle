@@ -129,17 +129,17 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-    
+      
     defaultConfig {
         applicationId "com.mitras"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1  
-        versionName "1.0.1.191019"             
+        versionCode 1    
+        versionName "1.0.0.251019"                      
         multiDexEnabled true  
         missingDimensionStrategy 'react-native-camera', 'general' 
-    }      
-    splits {   
+    }         
+    splits {     
         abi {
             reset()
             enable enableSeparateBuildPerCPUArchitecture
