@@ -42,18 +42,18 @@ import ImagePicker from 'react-native-image-picker';
 
 
 
-export default class Profile extends Component {
-    constructor ( props: any ) {
-        super( props );
-        this.state = {
-            urlImageBilling: { uri: "https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg" },
-            imgBillingDetails: { uri: "https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg" },
-            userDetails: {},
-            flag_Loading: false
-        };
-    }
+export default function Profile( props: any ) {
+    // constructor ( props: any ) {
+    //     super( props );
+    //     this.state = {
+    //         urlImageBilling: { uri: "https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg" },
+    //         imgBillingDetails: { uri: "https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg" },
+    //         userDetails: {},
+    //         flag_Loading: false
+    //     };
+    // }
 
-    click_SelectImage = async () => {
+    const click_SelectImage = async () => {
         const options =
         {
             mediaType: 'photo',
@@ -85,92 +85,85 @@ export default class Profile extends Component {
                 console.log( { source } );
                 // You can also display the image using data:
                 // const source = { uri: 'data:image/jpeg;base64,' + response.data };
-                this.setState( {
-                    urlImageBilling: source,
-                    imgBillingDetails: response
-                } );
+                // this.setState( {
+                //     urlImageBilling: source,
+                //     imgBillingDetails: response
+                // } );
             }
         } );
     }
 
-    render() {
-        //object
-        let { userDetails } = this.state;
-        //values
-        let { urlImageBilling } = this.state;
-        return (
-            <Container>
+    return (
+        <Container>
 
-                <SafeAreaView style={ [ styles.container, { backgroundColor: 'transparent' } ] }>
-                    <Content
-                        contentContainerStyle={ styles.container }
-                    >
-                        <View style={ { flex: 0.8, zIndex: 1, paddingTop: 80, alignItems: "center", backgroundColor: "#F4F4F4" } }>
-                            <TouchableOpacity onPress={ () => this.click_SelectImage() }>
-                                <Avatar
-                                    size="large"
-                                    rounded
-                                    source={
-                                        urlImageBilling
-                                    }
-                                />
-                            </TouchableOpacity>
-                            <Text>Appasaheb Lakade</Text>
-                            <Text note>9260303151</Text>
-                        </View>
+            <SafeAreaView style={ [ styles.container, { backgroundColor: 'transparent' } ] }>
+                <Content
+                    contentContainerStyle={ styles.container }
+                >
+                    <View style={ { flex: 0.8, zIndex: 1, paddingTop: 80, alignItems: "center", backgroundColor: "#F4F4F4" } }>
+                        <TouchableOpacity onPress={ () => this.click_SelectImage() }>
+                            <Avatar
+                                size="large"
+                                rounded
+                                source={
+                                    urlImageBilling
+                                }
+                            />
+                        </TouchableOpacity>
+                        <Text>Appasaheb Lakade</Text>
+                        <Text note>9260303151</Text>
+                    </View>
 
-                        <View style={ { flex: 0.2, zIndex: 2, marginTop: -40, margin: 10, flexDirection: "row", justifyContent: "center" } }>
-                            <Card style={ { width: 100, height: 80, justifyContent: "center" } }>
-                                <CardItem>
-                                    <Body >
-                                        <Text style={ { alignSelf: "center" } }>5</Text>
-                                        <Text style={ { alignSelf: "center" } }>order</Text>
-                                    </Body>
-                                </CardItem>
-                            </Card>
-                            <Card style={ { width: 100, height: 80, justifyContent: "center" } }>
-                                <CardItem>
-                                    <Body >
-                                        <Text style={ { alignSelf: "center" } }>5</Text>
-                                        <Text style={ { alignSelf: "center" } }>stat</Text>
-                                    </Body>
-                                </CardItem>
-                            </Card>
-                            <Card style={ { width: 100, height: 80, justifyContent: "center" } }>
-                                <CardItem>
-                                    <Body >
-                                        <Text style={ { alignSelf: "center" } }>5</Text>
-                                        <Text style={ { alignSelf: "center" } }>stat</Text>
-                                    </Body>
-                                </CardItem>
-                            </Card>
-                        </View>
+                    <View style={ { flex: 0.2, zIndex: 2, marginTop: -40, margin: 10, flexDirection: "row", justifyContent: "center" } }>
+                        <Card style={ { width: 100, height: 80, justifyContent: "center" } }>
+                            <CardItem>
+                                <Body >
+                                    <Text style={ { alignSelf: "center" } }>5</Text>
+                                    <Text style={ { alignSelf: "center" } }>order</Text>
+                                </Body>
+                            </CardItem>
+                        </Card>
+                        <Card style={ { width: 100, height: 80, justifyContent: "center" } }>
+                            <CardItem>
+                                <Body >
+                                    <Text style={ { alignSelf: "center" } }>5</Text>
+                                    <Text style={ { alignSelf: "center" } }>stat</Text>
+                                </Body>
+                            </CardItem>
+                        </Card>
+                        <Card style={ { width: 100, height: 80, justifyContent: "center" } }>
+                            <CardItem>
+                                <Body >
+                                    <Text style={ { alignSelf: "center" } }>5</Text>
+                                    <Text style={ { alignSelf: "center" } }>stat</Text>
+                                </Body>
+                            </CardItem>
+                        </Card>
+                    </View>
 
-                        <View style={ { flex: 1, marginTop: 40 } }>
-                            <Form>
-                                <Item stackedLabel>
-                                    <Label style={ { fontWeight: "bold" } }>Phone</Label>
-                                    <Input placeholder="Enter your number" />
-                                </Item>
-                                <Item stackedLabel>
-                                    <Label style={ { fontWeight: "bold" } }>Email(Option)</Label>
-                                    <Input placeholder="Enter your email" />
-                                </Item>
-                                <Item stackedLabel>
-                                    <Label style={ { fontWeight: "bold" } }>Address</Label>
-                                    <Input placeholder="Address 1,Address 2,Area,City" />
-                                </Item>
-                            </Form>
-                        </View>
+                    <View style={ { flex: 1, marginTop: 40 } }>
+                        <Form>
+                            <Item stackedLabel>
+                                <Label style={ { fontWeight: "bold" } }>Phone</Label>
+                                <Input placeholder="Enter your number" />
+                            </Item>
+                            <Item stackedLabel>
+                                <Label style={ { fontWeight: "bold" } }>Email(Option)</Label>
+                                <Input placeholder="Enter your email" />
+                            </Item>
+                            <Item stackedLabel>
+                                <Label style={ { fontWeight: "bold" } }>Address</Label>
+                                <Input placeholder="Address 1,Address 2,Area,City" />
+                            </Item>
+                        </Form>
+                    </View>
 
-                    </Content>
-                </SafeAreaView>
+                </Content>
+            </SafeAreaView>
 
-            </Container>
-        );
-    }
+        </Container>
+    );
 }
-
 
 let styles = StyleSheet.create( {
     container: {

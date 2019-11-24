@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import {
     StyleSheet,
     View,
@@ -55,26 +55,21 @@ interface Props {
     click_Next: Function
 }
 
-export default class Login extends Component<Props, any> {
-    constructor ( props: any ) {
-        super( props );
-        this.state = {
-            flag_Loading: false,
-            inputs: {
-                mobileNo: {
-                    type: "phone",
-                    value: ""
-                },
-                password: {
-                    type: "password",
-                    value: ""
-                },
-            }
-        };
-
-        this.onInputChange = validationService.onInputChange.bind( this );
-        this.getFormValidation = validationService.getFormValidation.bind( this );
-    }
+export default function Login( props: any ) {
+    const [ loading, setLoading ] = useState( false );
+    const inputs = {
+        mobileNo: {
+            type: "phone",
+            value: ""
+        },
+        password: {
+            type: "password",
+            value: ""
+        },
+    };
+    const onInputChange = validationService.onInputChange;
+    const getFormValidation = validationService.getFormValidation;
+    // }
 
     // //TODO: select option
     // onValueChange( value: string ) {
@@ -83,9 +78,9 @@ export default class Login extends Component<Props, any> {
     //     } );
     // }
 
-    click_Next = async () => {
-        this.getFormValidation();
-        const { inputs, itemSocietyName } = this.state;
+    const click_Next = async () => {
+        //getFormValidation();
+        // const { inputs, itemSocietyName } = this.state;
         console.log( { inputs } );
         var isValid = true;
         for ( var i in inputs ) {
@@ -112,7 +107,7 @@ export default class Login extends Component<Props, any> {
                         } )
                     ]
                 } );
-                this.props.navigation.dispatch( resetAction );
+                props.navigation.dispatch( resetAction );
                 await AsyncStorage.setItem( asyncStorageKeys.rootViewController, "CustomersTabbarNavigator" );
             } else {
                 const resetAction = StackActions.reset( {
@@ -124,7 +119,7 @@ export default class Login extends Component<Props, any> {
                         } )
                     ]
                 } );
-                this.props.navigation.dispatch( resetAction );
+                props.navigation.dispatch( resetAction );
                 await AsyncStorage.setItem( asyncStorageKeys.rootViewController, "UserTabbarNavigator" );
             }
         } else {
@@ -133,78 +128,72 @@ export default class Login extends Component<Props, any> {
     }
 
     //TODO: Validation
-    renderError( id: any ) {
-        const { inputs } = this.state;
+    const renderError = ( id: any ) => {
         if ( inputs[ id ].errorLabel ) {
             return <Text style={ validationService.styles.error }>{ inputs[ id ].errorLabel }</Text>;
         }
         return null;
     }
 
-    render() {
-        // const itemList = this.state.arrSocietyList.map( ( item: any, index: number ) => (
-        //     <Picker.Item label={ item.item } value={ item.item } />
-        // ) );
-        let { flag_Loading } = this.state;
-        return (
-            <Container>
-                <HeaderTitle title="Login"
-                    pop={ () => this.props.navigation.pop() }
-                />
-                <Content
-                    contentContainerStyle={ styles.container }
-                >
-                    <KeyboardAwareScrollView
-                        enableOnAndroid
-                        extraScrollHeight={ 0 }
-                        contentContainerStyle={ { flexGrow: 1 } }
-                    >
-                        <View style={ { flex: 1, alignItems: "center", marginTop: 20 } }>
 
-                            <View style={ styles.viewInputFiled }>
-                                <Item rounded style={ styles.itemInputWalletName }>
-                                    <Input
-                                        keyboardType="number-pad"
-                                        autoCapitalize='sentences'
-                                        placeholder='Mobile'
-                                        placeholderTextColor="#B7B7B7"
-                                        onChangeText={ value => {
-                                            this.onInputChange( { id: "mobileNo", value } );
-                                        } }
-                                    />
-                                </Item>
-                                { this.renderError( "mobileNo" ) }
-                            </View>
-                            <View style={ styles.viewInputFiled }>
-                                <Item rounded style={ styles.itemInputWalletName }>
-                                    <Input
-                                        secureTextEntry
-                                        keyboardType="default"
-                                        autoCapitalize='sentences'
-                                        placeholder='Password'
-                                        placeholderTextColor="#B7B7B7"
-                                        onChangeText={ value => {
-                                            this.onInputChange( { id: "password", value } );
-                                        } }
-                                    />
-                                </Item>
-                                { this.renderError( "password" ) }
-                            </View>
+    return (
+        <Container>
+            <HeaderTitle title="Login"
+                pop={ () => props.navigation.pop() }
+            />
+            <Content
+                contentContainerStyle={ styles.container }
+            >
+                <KeyboardAwareScrollView
+                    enableOnAndroid
+                    extraScrollHeight={ 0 }
+                    contentContainerStyle={ { flexGrow: 1 } }
+                >
+                    <View style={ { flex: 1, alignItems: "center", marginTop: 20 } }>
+
+                        <View style={ styles.viewInputFiled }>
+                            <Item rounded style={ styles.itemInputWalletName }>
+                                <Input
+                                    keyboardType="number-pad"
+                                    autoCapitalize='sentences'
+                                    placeholder='Mobile'
+                                    placeholderTextColor="#B7B7B7"
+                                    onChangeText={ value => {
+                                        onInputChange( { id: "mobileNo", value } );
+                                    } }
+                                />
+                            </Item>
+                            { renderError( "mobileNo" ) }
                         </View>
-                        <View style={ { flex: 0.1 } }>
-                            <FullLinearGradientButton
-                                title="Login"
-                                disabled={ false }
-                                style={ [ false ? { opacity: 0.4 } : { opacity: 1 }, { borderRadius: 10 } ] }
-                                click_Done={ () => this.click_Next() } />
+                        <View style={ styles.viewInputFiled }>
+                            <Item rounded style={ styles.itemInputWalletName }>
+                                <Input
+                                    secureTextEntry
+                                    keyboardType="default"
+                                    autoCapitalize='sentences'
+                                    placeholder='Password'
+                                    placeholderTextColor="#B7B7B7"
+                                    onChangeText={ value => {
+                                        onInputChange( { id: "password", value } );
+                                    } }
+                                />
+                            </Item>
+                            { renderError( "password" ) }
                         </View>
-                    </KeyboardAwareScrollView>
-                </Content>
-                <StatusBar backgroundColor={ colors.appColor } flagShowStatusBar={ true } barStyle="light-content" />
-                <ModelLoader loading={ flag_Loading } color={ colors.appColor } size={ 30 } />
-            </Container>
-        );
-    }
+                    </View>
+                    <View style={ { flex: 0.1 } }>
+                        <FullLinearGradientButton
+                            title="Login"
+                            disabled={ false }
+                            style={ [ false ? { opacity: 0.4 } : { opacity: 1 }, { borderRadius: 10 } ] }
+                            click_Done={ () => click_Next() } />
+                    </View>
+                </KeyboardAwareScrollView>
+            </Content>
+            <StatusBar backgroundColor={ colors.appColor } flagShowStatusBar={ true } barStyle="light-content" />
+            <ModelLoader loading={ loading } color={ colors.appColor } size={ 30 } />
+        </Container>
+    );
 }
 
 let styles = StyleSheet.create( {

@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import {
     StyleSheet,
     View,
@@ -49,38 +49,33 @@ interface Props {
     click_Next: Function
 }
 
-export default class Registration extends Component<Props, any> {
-    constructor ( props: any ) {
-        super( props );
-        this.state = {
-            flag_Loading: false,
-            inputs: {
-                name: {
-                    type: "generic",
-                    value: ""
-                },
-                email: {
-                    type: "email",
-                    value: ""
-                },
-                mobileNo: {
-                    type: "phone",
-                    value: ""
-                },
-                password: {
-                    type: "password",
-                    value: ""
-                },
-                confirmPassword: {
-                    type: "confirmPassword",
-                    value: ""
-                }
-            }
-        };
+export default function Registration( props: any ) {
+    const [ loading, setLoading ] = useState( false );
+    const inputs: {
+        name: {
+            type: "generic",
+            value: ""
+        },
+        email: {
+            type: "email",
+            value: ""
+        },
+        mobileNo: {
+            type: "phone",
+            value: ""
+        },
+        password: {
+            type: "password",
+            value: ""
+        },
+        confirmPassword: {
+            type: "confirmPassword",
+            value: ""
+        }
+    };
+    const onInputChange = validationService.onInputChange;
+    const getFormValidation = validationService.getFormValidation;
 
-        this.onInputChange = validationService.onInputChange.bind( this );
-        this.getFormValidation = validationService.getFormValidation.bind( this );
-    }
 
     // async componentWillMount() {
     //     var data = await ApiManager.getAllData( apiary.getSocietyNames );
@@ -103,15 +98,9 @@ export default class Registration extends Component<Props, any> {
     // }
 
 
-    //TODO: select option
-    onValueChange( value: string ) {
-        this.setState( {
-            itemSocietyName: value
-        } );
-    }
 
-    click_Next = () => {
-        this.getFormValidation();
+    const click_Next = () => {
+        getFormValidation();
         // const { inputs, itemSocietyName } = this.state;
         // console.log( { inputs } );
         // var isValid = true;
@@ -171,126 +160,123 @@ export default class Registration extends Component<Props, any> {
     }
 
     //TODO: Validation
-    renderError( id: any ) {
-        const { inputs } = this.state;
+    const renderError = ( id: any ) => {
         if ( inputs[ id ].errorLabel ) {
             return <Text style={ validationService.styles.error }>{ inputs[ id ].errorLabel }</Text>;
         }
         return null;
     }
 
-    render() {
-        let { flag_Loading } = this.state;
-        return (
-            <Container>
-                <HeaderTitle title="Registration"
-                    pop={ () => this.props.navigation.pop() }
-                />
-                <Content
-                    contentContainerStyle={ styles.container }
-                >
-                    <KeyboardAwareScrollView
-                        enableOnAndroid
-                        extraScrollHeight={ 0 }
-                        contentContainerStyle={ { flexGrow: 1 } }
-                    >
-                        <View style={ { flex: 1, alignItems: "center", marginTop: 20 } }>
 
-                            <View style={ styles.viewInputFiled }>
-                                <Item rounded style={ styles.itemInputWalletName }>
-                                    <Input
-                                        keyboardType="default"
-                                        autoCapitalize='sentences'
-                                        placeholder='Name'
-                                        placeholderTextColor="#B7B7B7"
-                                        onChangeText={ value => {
-                                            this.onInputChange( { id: "name", value } );
-                                        } }
-                                    />
-                                </Item>
-                                { this.renderError( "name" ) }
-                            </View>
-                            <View style={ styles.viewInputFiled }>
-                                <Item rounded style={ styles.itemInputWalletName }>
-                                    <Input
-                                        keyboardType="email-address"
-                                        autoCapitalize='sentences'
-                                        placeholder='Email'
-                                        placeholderTextColor="#B7B7B7"
-                                        onChangeText={ value => {
-                                            this.onInputChange( { id: "email", value } );
-                                        } }
-                                    />
-                                </Item>
-                                { this.renderError( "email" ) }
-                            </View>
-                            <View style={ styles.viewInputFiled }>
-                                <Item rounded style={ styles.itemInputWalletName }>
-                                    <Input
-                                        keyboardType="number-pad"
-                                        autoCapitalize='sentences'
-                                        placeholder='Mobile'
-                                        placeholderTextColor="#B7B7B7"
-                                        onChangeText={ value => {
-                                            this.onInputChange( { id: "mobileNo", value } );
-                                        } }
-                                    />
-                                </Item>
-                                { this.renderError( "mobileNo" ) }
-                            </View>
-                            <View style={ styles.viewInputFiled }>
-                                <Item rounded style={ styles.itemInputWalletName }>
-                                    <Input
-                                        secureTextEntry
-                                        keyboardType="default"
-                                        autoCapitalize='sentences'
-                                        placeholder='Password'
-                                        placeholderTextColor="#B7B7B7"
-                                        onChangeText={ value => {
-                                            this.onInputChange( { id: "password", value } );
-                                        } }
-                                    />
-                                </Item>
-                                { this.renderError( "password" ) }
-                            </View>
-                            <View style={ styles.viewInputFiled }>
-                                <Item rounded style={ styles.itemInputWalletName }>
-                                    <Input
-                                        secureTextEntry
-                                        keyboardType="default"
-                                        autoCapitalize='sentences'
-                                        placeholder='Confirm Password'
-                                        placeholderTextColor="#B7B7B7"
-                                        onChangeText={ value => {
-                                            this.onInputChange( { id: "confirmPassword", value } );
-                                        } }
-                                    />
-                                </Item>
-                                { this.renderError( "confirmPassword" ) }
-                            </View>
+    return (
+        <Container>
+            <HeaderTitle title="Registration"
+                pop={ () => props.navigation.pop() }
+            />
+            <Content
+                contentContainerStyle={ styles.container }
+            >
+                <KeyboardAwareScrollView
+                    enableOnAndroid
+                    extraScrollHeight={ 0 }
+                    contentContainerStyle={ { flexGrow: 1 } }
+                >
+                    <View style={ { flex: 1, alignItems: "center", marginTop: 20 } }>
+
+                        <View style={ styles.viewInputFiled }>
+                            <Item rounded style={ styles.itemInputWalletName }>
+                                <Input
+                                    keyboardType="default"
+                                    autoCapitalize='sentences'
+                                    placeholder='Name'
+                                    placeholderTextColor="#B7B7B7"
+                                    onChangeText={ value => {
+                                        onInputChange( { id: "name", value } );
+                                    } }
+                                />
+                            </Item>
+                            { renderError( "name" ) }
                         </View>
-                        <View style={ { flex: 0.1 } }>
-                            <FullLinearGradientButton
-                                title="Registration"
-                                disabled={ false }
-                                style={ [ false ? { opacity: 0.4 } : { opacity: 1 }, { borderRadius: 10 } ] }
-                                click_Done={ () => this.click_Next() } />
-                            <Button
-                                transparent
-                                style={ { justifyContent: "center" } }
-                                onPress={ () => this.props.navigation.push( "Login" ) }
-                            >
-                                <Text >Already member, Login In
+                        <View style={ styles.viewInputFiled }>
+                            <Item rounded style={ styles.itemInputWalletName }>
+                                <Input
+                                    keyboardType="email-address"
+                                    autoCapitalize='sentences'
+                                    placeholder='Email'
+                                    placeholderTextColor="#B7B7B7"
+                                    onChangeText={ value => {
+                                        onInputChange( { id: "email", value } );
+                                    } }
+                                />
+                            </Item>
+                            { renderError( "email" ) }
+                        </View>
+                        <View style={ styles.viewInputFiled }>
+                            <Item rounded style={ styles.itemInputWalletName }>
+                                <Input
+                                    keyboardType="number-pad"
+                                    autoCapitalize='sentences'
+                                    placeholder='Mobile'
+                                    placeholderTextColor="#B7B7B7"
+                                    onChangeText={ value => {
+                                        onInputChange( { id: "mobileNo", value } );
+                                    } }
+                                />
+                            </Item>
+                            { renderError( "mobileNo" ) }
+                        </View>
+                        <View style={ styles.viewInputFiled }>
+                            <Item rounded style={ styles.itemInputWalletName }>
+                                <Input
+                                    secureTextEntry
+                                    keyboardType="default"
+                                    autoCapitalize='sentences'
+                                    placeholder='Password'
+                                    placeholderTextColor="#B7B7B7"
+                                    onChangeText={ value => {
+                                        onInputChange( { id: "password", value } );
+                                    } }
+                                />
+                            </Item>
+                            { renderError( "password" ) }
+                        </View>
+                        <View style={ styles.viewInputFiled }>
+                            <Item rounded style={ styles.itemInputWalletName }>
+                                <Input
+                                    secureTextEntry
+                                    keyboardType="default"
+                                    autoCapitalize='sentences'
+                                    placeholder='Confirm Password'
+                                    placeholderTextColor="#B7B7B7"
+                                    onChangeText={ value => {
+                                        onInputChange( { id: "confirmPassword", value } );
+                                    } }
+                                />
+                            </Item>
+                            { renderError( "confirmPassword" ) }
+                        </View>
+                    </View>
+                    <View style={ { flex: 0.1 } }>
+                        <FullLinearGradientButton
+                            title="Registration"
+                            disabled={ false }
+                            style={ [ false ? { opacity: 0.4 } : { opacity: 1 }, { borderRadius: 10 } ] }
+                            click_Done={ () => click_Next() } />
+                        <Button
+                            transparent
+                            style={ { justifyContent: "center" } }
+                            onPress={ () => props.navigation.push( "Login" ) }
+                        >
+                            <Text >Already member, Login In
                          </Text>
-                            </Button>
-                        </View>
-                    </KeyboardAwareScrollView>
-                </Content>
-                <StatusBar backgroundColor={ colors.appColor } flagShowStatusBar={ true } barStyle="light-content" />
-                <ModelLoader loading={ flag_Loading } color={ colors.appColor } size={ 30 } />
-            </Container>
-        );
-    }
+                        </Button>
+                    </View>
+                </KeyboardAwareScrollView>
+            </Content>
+            <StatusBar backgroundColor={ colors.appColor } flagShowStatusBar={ true } barStyle="light-content" />
+            <ModelLoader loading={ loading } color={ colors.appColor } size={ 30 } />
+        </Container>
+    );
 }
 
 let styles = StyleSheet.create( {
