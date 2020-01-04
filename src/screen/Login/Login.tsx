@@ -49,11 +49,8 @@ import { colors, images, asyncStorageKeys } from "mitrasConstants";
 //TODO: Custome Validation
 import { validationService } from "mitrasValidation";
 
-
-
-interface Props {
-    click_Next: Function
-}
+import { getResult } from "../../redux/actions/common";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function Login( props: any ) {
     const [ loading, setLoading ] = useState( false );
@@ -69,62 +66,63 @@ export default function Login( props: any ) {
     };
     const onInputChange = validationService.onInputChange;
     const getFormValidation = validationService.getFormValidation;
-    // }
 
-    // //TODO: select option
-    // onValueChange( value: string ) {
-    //     this.setState( {
-    //         itemSocietyName: value
-    //     } );
-    // }
+
+    const dispatch = useDispatch();
+    const commonRes = useSelector( state => state.common.payload );
+
+    console.log( { commonRes } );
+
+
 
     const click_Next = async () => {
-        //getFormValidation();
-        // const { inputs, itemSocietyName } = this.state;
-        console.log( { inputs } );
-        var isValid = true;
-        for ( var i in inputs ) {
-            if ( inputs[ i ].hasOwnProperty( 'errorLabel' ) ) {
-                if ( inputs[ i ].errorLabel != null ) {
-                    console.log( 'null' );
-                    isValid = false;
-                    break;
-                }
-            } else {
-                isValid = false;
-                break;
-            }
-        }
-        console.log( { isValid } );
-        if ( isValid ) {
-            if ( inputs.mobileNo.value == "1234567890" && inputs.password.value == "123456" ) {
-                const resetAction = StackActions.reset( {
-                    index: 0, // <-- currect active route from actions array
-                    key: null,
-                    actions: [
-                        NavigationActions.navigate( {
-                            routeName: "CustomersTabbarNavigator"
-                        } )
-                    ]
-                } );
-                props.navigation.dispatch( resetAction );
-                await AsyncStorage.setItem( asyncStorageKeys.rootViewController, "CustomersTabbarNavigator" );
-            } else {
-                const resetAction = StackActions.reset( {
-                    index: 0, // <-- currect active route from actions array
-                    key: null,
-                    actions: [
-                        NavigationActions.navigate( {
-                            routeName: "UserTabbarNavigator"
-                        } )
-                    ]
-                } );
-                props.navigation.dispatch( resetAction );
-                await AsyncStorage.setItem( asyncStorageKeys.rootViewController, "UserTabbarNavigator" );
-            }
-        } else {
-            Alert.alert( "Please enter correct mobile no and password." )
-        }
+        // getFormValidation();
+        // var isValid = true;
+        // for ( var i in inputs ) {
+        //     if ( inputs[ i ].hasOwnProperty( 'errorLabel' ) ) {
+        //         if ( inputs[ i ].errorLabel != null ) {
+        //             console.log( 'null' );
+        //             isValid = false;
+        //             break;
+        //         }
+        //     } else {
+        //         isValid = false;
+        //         break;
+        //     }
+        // }
+        // console.log( { isValid } );
+        // if ( isValid ) {    
+        dispatch( getResult( "http://society.shridaplastic.com/api/getVisitorAll" ) )
+        // if ( inputs.mobileNo.value == "1234567890" && inputs.password.value == "123456" ) {
+        //     const resetAction = StackActions.reset( {
+        //         index: 0, // <-- currect active route from actions array
+        //         key: null,
+        //         actions: [
+        //             NavigationActions.navigate( {
+        //                 routeName: "CustomersTabbarNavigator"
+        //             } )
+        //         ]
+        //     } );
+        //     props.navigation.dispatch( resetAction );
+        //     await AsyncStorage.setItem( asyncStorageKeys.rootViewController, "CustomersTabbarNavigator" );
+        // } else {
+        //     const resetAction = StackActions.reset( {
+        //         index: 0, // <-- currect active route from actions array
+        //         key: null,
+        //         actions: [
+        //             NavigationActions.navigate( {
+        //                 routeName: "UserTabbarNavigator"
+        //             } )
+        //         ]
+        //     } );
+        //     props.navigation.dispatch( resetAction );
+        //     await AsyncStorage.setItem( asyncStorageKeys.rootViewController, "UserTabbarNavigator" );
+        // }
+
+
+        // } else {
+        //     Alert.alert( "Please enter correct mobile no and password." )
+        // }
     }
 
     //TODO: Validation
